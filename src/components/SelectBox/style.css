@@ -1,0 +1,33 @@
+
+.dropdown-header {
+  border-radius: 5px;
+  border: 2px solid hsla(216, 15%, 57%, 1);
+  padding: 8px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-body {
+  position: absolute;
+  /* background-color: hsla(235, 12%, 19%, 1); */
+  width:90%;
+  margin-top:0.5em;
+  border-radius: 5px;
+}
+
+.icon {
+  font-size: 13px;
+  color: #91a5be;
+  transform: rotate(0deg);
+  transition: all 0.5s ease-in-out;
+  
+}
+
+.open {
+ 
+  /* transform: rotate(80deg); */
+  /* transform: rotate(90deg); */
+  /* transform: rotate(360deg); */
+}

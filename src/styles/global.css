@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* light mode */
+    color: black;
+    background-color: hsla(220, 69%, 97%, 1);
+  }
+  .dark{
+    background-color: hsla(235, 16%, 15%,1);
+    color: hsla(0, 0%, 100%, 1);
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+    width:100%;
+    /* background-color: hsla(235, 16%, 15%, 1); */
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    background-color:transparent;
+    @apply border-gray/20 border-[2px]
+  }
+
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    overflow:hidden;
+    height: 100%;
+    width:100%;
+ 
+
+  }
+
+  /* ol,
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+input,
+textarea {
+  border: 0;
+  outline: 0;
+}
+
+button {
+  background: inherit;
+  border: 0;
+  outline: inherit;
+  cursor: pointer;
+} */
+
+  /* button:focus-visible {
+  outline: 2px solid #dd9951;
+} */
+
+  /* input[type="checkbox"] :focus-visible {
+  outline: 2px solid #dd9951;
+} */
+}
