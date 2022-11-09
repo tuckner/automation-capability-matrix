@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useState } from "react";
-import {IBoard, AppContextType,ThemeContextType, Theme } from "types";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { IBoard, AppContextType, IColumn, ITask } from "types";
 import { boards } from "data";
 export const AppContext = createContext<AppContextType | null>(null);
 
@@ -8,16 +8,34 @@ export const AppProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  const [board, setBoard] = useState<IBoard[]>(boards);
-  const [platform, setPlatform] = useState<IBoard>(boards[0]);
-  const [marketing, setMarketing] = useState<IBoard>(boards[1]);
-  const [roadmap, setroadmap] = useState<IBoard>(boards[2]);
+  const [board, setBoard] = useState<IBoard[]>([]);
+  const [active, setIsActive] = useState<IBoard | any>([]);
+
+  useEffect(() => {
+    getInitialState();
+  }, []);
+
+  function getInitialState(currentItem?: IBoard) {
+    if (localStorage.getItem("board") === null) {
+      localStorage.setItem("board", JSON.stringify(boards));
+    }
+    const items = JSON.parse(localStorage.getItem("board") || "");
+    setBoard(items);
+    if (currentItem) {
+      setIsActive(currentItem);
+    } else {
+      const initialitem = items.find(
+        (item: IBoard, index: number) => index === 0
+      );
+      setIsActive(initialitem);
+    }
+  }
 
   return (
-    <AppContext.Provider value={{ board, platform, marketing, roadmap }}>
+    <AppContext.Provider
+      value={{ board, setBoard, active, setIsActive, getInitialState }}
+    >
       {children}
     </AppContext.Provider>
   );
 };
-
-// add theme here too

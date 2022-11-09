@@ -11,8 +11,9 @@
 
 .dropdown-body {
   position: absolute;
-  /* background-color: hsla(235, 12%, 19%, 1); */
-  width:90%;
+top:25px;
+z-index: 1;
+  width:80%;
   margin-top:0.5em;
   border-radius: 5px;
 }

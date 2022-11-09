@@ -15,7 +15,8 @@ module.exports = {
       "sea-green": "hsla(155, 68% ,65%, 1)",
       white: '#ffffff',
       black:'#000',
-      offwhite:"hsla(220, 69%, 97%, 1)"
+      offwhite:"hsla(220, 69%, 97%, 1)",
+      error: "#dc2626"
     },
 
   },

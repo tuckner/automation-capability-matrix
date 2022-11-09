@@ -36,6 +36,7 @@ export interface ITask {
     isCompleted: boolean;
   }[];
 }
+
 export interface ISubTask {
   title: string;
   isCompleted: boolean;
@@ -43,7 +44,9 @@ export interface ISubTask {
 
 export interface AppContextType {
   board: IBoard[];
-  platform: IBoard;
-  marketing: IBoard;
-  roadmap: IBoard;
+  // platform: IBoard;
+  setBoard: Dispatch<SetStateAction<IBoard[]>>;
+  getInitialState:(currentItem?)=>void;
+  active:  IBoard;
+  setIsActive :Dispatch<SetStateAction<IBoard>>
 }
