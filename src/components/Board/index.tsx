@@ -1,20 +1,23 @@
 import Modal from "components/Modal";
-import { useContext, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { BsCircleFill } from "react-icons/bs";
-import { AppContext } from "../../context";
-import { AppContextType, IBoard, IColumn, ITask } from "../../types";
+import { useDispatch, useSelector } from "react-redux";
+import { appData } from "redux/boardSlice";
+import { IBoard, IColumn, ITask } from "../../types";
 import AddBoard from "./AddBoard";
+import AddTask from "./AddTask";
 import TaskItem from "./TaskItem";
 
+export default function index() {
+  const data = useSelector(appData);
+  const { active } = data;
 
-type Props = {
- active:IBoard
-};
-export default function index({active}:Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenBoard, setOpenBoard] = useState(false);
+
   return (
     <>
-      <div className="z-0 h-full flex gap-x-10 w-full">
+      <div className=" h-full flex gap-x-10 w-full">
         {active ? (
           <>
             {active.columns?.map((item: IColumn, index: number) => {
@@ -65,8 +68,27 @@ export default function index({active}:Props) {
               );
             })}
 
-            <div className="mt-8  w-[250px] shrink-0 ">
-              <div className=" h-full dark:bg-secondary/20  flex flex-col justify-center text-center rounded-lg">
+            <div className="mt-8 h-full w-[250px]  shrink-0 ">
+              <div
+                onClick={() => setIsOpen(true)}
+                className=" h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
+              >
+                <p className="text-xl  text-gray font-bold"> + New Column</p>
+              </div>
+            </div>
+            <div className="mt-8 h-full w-[250px]  shrink-0 ">
+              <div
+                onClick={() => setIsOpen(true)}
+                className=" h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
+              >
+                <p className="text-xl  text-gray font-bold"> + New Column</p>
+              </div>
+            </div>
+            <div className="mt-8 h-full w-[250px]  shrink-0 ">
+              <div
+                onClick={() => setIsOpen(true)}
+                className=" h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
+              >
                 <p className="text-xl  text-gray font-bold"> + New Column</p>
               </div>
             </div>
@@ -74,7 +96,7 @@ export default function index({active}:Props) {
         ) : (
           <div
             onClick={() => {
-              setIsOpen(true);
+              setOpenBoard(true);
             }}
             className="font-bold  text-xl cursor-pointer text-primary hover:opacity-20
       fixed -translate-y-[50%] -translate-x-[50%] top-[50%] left-[50%]"
@@ -83,8 +105,18 @@ export default function index({active}:Props) {
           </div>
         )}
       </div>
-      <Modal open={isOpen} handleClose={() => setIsOpen(false)}>
-        <AddBoard handleClose={() => setIsOpen(false)} />
+
+      <Modal
+        open={isOpen || isOpenBoard}
+        handleClose={() => {
+          setIsOpen(false), setOpenBoard(false);
+        }}
+      >
+        {isOpenBoard ? (
+          <AddBoard handleClose={() => setOpenBoard(false)} />
+        ) : (
+          <AddTask handleClose={() => setIsOpen(false)} />
+        )}
       </Modal>
     </>
   );

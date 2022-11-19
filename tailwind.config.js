@@ -16,7 +16,7 @@ module.exports = {
       white: '#ffffff',
       black:'#000',
       offwhite:"hsla(220, 69%, 97%, 1)",
-      error: "#dc2626"
+      error: "#ea5555"
     },
 
   },

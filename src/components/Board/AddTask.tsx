@@ -1,26 +1,37 @@
+import { useState } from "react";
 import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
 import SelectBox from "components/SelectBox";
 import { TextInput, TextArea, SubtaskInput } from "../InputField";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { IBoard, IColumn, ISubTask, ITask } from "types";
-import { AppContext } from "../../context";
-import { AppContextType } from "../../types";
-
+import { IColumn, ISubTask, ITask } from "types";
+import { appData, addTask, editTask, deleteTask } from "redux/boardSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { checkDuplicatesTask } from "utilis";
+import { useToast } from '@chakra-ui/react'
 type Props = {
   handleClose: () => void;
   tasks?: ITask;
   index?: number;
 };
-export default function AddTask({ handleClose, tasks, index }: Props) {
-  const { active, getInitialState, board } = useContext(
-    AppContext
-  ) as AppContextType;
-  const [selectedStatus, setStatus] = useState<string>("");
+export default function AddTask({ handleClose, tasks }: Props) {
+  const dispatch = useDispatch();
+  const data = useSelector(appData);
+  const { active } = data;
+  const toast = useToast()
+
+  const [selectedStatus, setStatus] = useState<string | any>(
+    tasks
+      ? active.columns.find((item: IColumn) =>
+          item.tasks.find((o) => o == tasks)
+        )?.name
+      : active.columns.find((item: IColumn) =>
+          item.tasks.find((o, index) => index === 0)
+        )?.name
+  );
 
   const TaskSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
-    description: Yup.string().required("Required"),
+    description: Yup.string(),
     status: Yup.string(),
     subtasks: Yup.array()
       .of(
@@ -34,29 +45,32 @@ export default function AddTask({ handleClose, tasks, index }: Props) {
 
   const addTaskHandler = (values: ITask) => {
     values.status = selectedStatus;
-   const see = active.columns.find((item) =>
-      item.name === values.status ? item.tasks.push(values) : null
-    );
-    // what if the values.status is changed?
-    console.log(active)
+    let item
+    const foundDuplicate = checkDuplicatesTask(values,  active);
+    if (foundDuplicate === false) {
+      dispatch(addTask(values));
+    } else {
+      toast({
+        title: 'Item already exist.',
+        position: 'top',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      })
+    }
+
     handleClose();
-    localStorage.setItem("board", JSON.stringify(board));
-    getInitialState(active);
-    console.log(board)
   };
 
   const editTaskHandler = (values: ITask) => {
-    // console.log(index);
-     board.find((item) =>
-      item.columns.find((o) =>
-        o.tasks.find((s) =>
-          s.title === tasks?.title ? (s = { ...s, ...values }) : null
-        )
-      )
-    );
- 
-    localStorage.setItem("board", JSON.stringify([...board]));
-    getInitialState(active);
+    if (values.status === selectedStatus) {
+      dispatch(editTask({ values, tasks }));
+    } else {
+      values.status = selectedStatus;
+      dispatch(addTask(values));
+      dispatch(deleteTask(tasks));
+    }
+    handleClose();
   };
 
   return (

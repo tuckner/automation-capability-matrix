@@ -21,7 +21,9 @@ export const TextInput = ({
   const [field, meta] = useField(props);
   return (
     <>
-      <label  className="text-sm font-bold" htmlFor={props.id || props.name}>{label}</label>
+      <label className="text-sm font-bold" htmlFor={props.id || props.name}>
+        {label}
+      </label>
       <Field
         {...field}
         placeholder={props.placeholder}
@@ -38,7 +40,9 @@ export const TextArea = (props: LabelProps & FieldHookConfig<string>) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <label  className="text-sm font-bold" htmlFor={props.id || props.name}>{props.label}</label>
+      <label className="text-sm font-bold" htmlFor={props.id || props.name}>
+        {props.label}
+      </label>
       <textarea
         className="p-2 w-full rounded-md outline-none  text-sm h-20 placeholder:text-xs"
         placeholder={props.placeholder}
@@ -57,13 +61,12 @@ export const SubtaskInput = ({
   ...props
 }: OtherProps & FieldHookConfig<string>) => {
   const [field, meta] = useField(props);
-  
+
   return (
     <>
       <div className="flex gap-2 mt-4  items-center">
         <Field
           {...field}
-       
           placeholder={props.placeholder}
           className="p-2 w-full text-sm rounded-md outline-none"
         />

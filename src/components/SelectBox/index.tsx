@@ -1,40 +1,34 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useState,
-  useContext,
-  useEffect,
-} from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import "./style.css";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
-import { AppContext } from "../../context";
-import { AppContextType, IColumn } from "../../types";
-
+import { IColumn, ITask } from "types";
+import { addTask, appData, deleteTask } from "redux/boardSlice";
+import { useDispatch, useSelector } from "react-redux";
 interface Props {
   selectedStatus: string;
   setStatus: Dispatch<SetStateAction<string>>;
+  tasks?: ITask;
+  handleClose?: () => void;
 }
 
-export default function index({ selectedStatus, setStatus }: Props) {
-  const { active } = useContext(AppContext) as AppContextType;
+export default function index({ selectedStatus, setStatus, tasks }: Props) {
+  const dispatch = useDispatch();
+  const data = useSelector(appData);
+  const { active } = data;
   const [isOpen, setOpen] = useState(false);
-  const [columns, setColumn] = useState<IColumn[]>(active.columns);
-
-  useEffect(() => {
-    let columnData = active.columns.filter((subitem) => subitem.name);
-    setColumn(columnData);
-    columnData.find((item, index) =>
-      index === 0 ? setStatus(item.name) : null
-    );
-  }, [active]);
 
   const toggleDropdown = () => setOpen(!isOpen);
 
   const handleItemClick = (title: string) => {
     setStatus(title);
-    setOpen(false);
-    
-    // active.columns.find((o)=>o.)
+    if (tasks?.status !== title && tasks !== undefined) {
+      const updatedTasks = {
+        ...tasks,
+        status: title,
+      };
+      dispatch(addTask(updatedTasks));
+      dispatch(deleteTask(tasks));
+    }
   };
 
   return (
@@ -49,7 +43,9 @@ export default function index({ selectedStatus, setStatus }: Props) {
           {" "}
           {selectedStatus
             ? selectedStatus
-            : columns.find((item, index) => index === 0)?.name}
+            : active.columns.find((item: IColumn) =>
+                item.tasks.find((o, index) => index === 0)
+              )?.name}
         </p>
         {isOpen ? (
           <BiChevronDown className={`icon ${isOpen && "open"}`} />
@@ -58,7 +54,7 @@ export default function index({ selectedStatus, setStatus }: Props) {
         )}
         {isOpen && (
           <div className={`dropdown-body bg-offwhite dark:bg-secondary-dark `}>
-            {columns.map((item, i) => (
+            {active.columns.map((item: IColumn, i: number) => (
               <div
                 className={`dropdown-item text-sm px-4 py-2 hover:text-primary cursor-pointer ${
                   i < 2 && "border-b-[1px] border-gray/20"

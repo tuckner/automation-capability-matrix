@@ -1,94 +1,94 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { MdLightMode, MdVisibilityOff } from "react-icons/md";
 import { BsMoonStarsFill } from "react-icons/bs";
 import Icon from "components/Icon";
 import ToggleBtn from "components/ToggleBtn";
-import { AppContextType, IBoard } from "types";
+import { IBoard } from "types";
 import AddBoard from "components/Board/AddBoard";
 import Modal from "components/Modal";
+import { useMediaQuery } from "react-responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { appData, activeItem } from "redux/boardSlice";
 
 type Props = {
-  show: boolean;
-  setShow: Dispatch<SetStateAction<boolean>>;
-  active: IBoard;
-  setIsActive: Dispatch<SetStateAction<IBoard>>;
-  board: IBoard[];
+  setShow?: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function index({
-  board,
-  active,
-  setIsActive,
-  show,
-  setShow,
-}: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function index({ setShow }: Props) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const data = useSelector(appData);
+  const { active, board } = data;
+
+  const isMobile = useMediaQuery({ query: "(min-width: 700px)" });
 
   return (
     <>
-      {show && (
-        <div
-          className={`z-10 text-gray bg-white dark:bg-secondary border-r-[1px] 
-    border-gray/20 pt-4 pr-4 pb-24 flex 
-        flex-col justify-between fixed left-0 h-screen w-72`}
-        >
+      <div
+        className={`text-gray bg-white dark:bg-secondary ${
+          isMobile && " pr-4 pb-24 border-r-[1px] border-gray/20"
+        } 
+     pt-4  flex 
+        flex-col justify-between h-full left-0 `}
+      >
+        <div>
+          <p className="pl-6 py-2 text-xs">ALL BOARDS({board.length})</p>
           <div>
-            <p className="pl-6 py-2 text-xs">ALL BOARDS({board.length})</p>
-            <div className="">
-              {board && (
-                <>
-                  {board.map((options, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className={`py-3 px-6 flex items-center gap-x-4 font-bold cursor-pointer ${`${
-                          active.name === options.name
-                            ? "bg-primary rounded-r-full text-white"
-                            : "hover:bg-primary/20 rounded-r-full"
-                        } `} `}
-                        onClick={() => {
-                          setIsActive(options);
-                        }}
-                      >
-                        <Icon type="board" />
-                        {options.name}
-                      </div>
-                    );
-                  })}
-                </>
-              )}
+            {board && (
+              <>
+                {board.map((options: IBoard, index: number) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`py-3 px-6 flex items-center gap-x-4 font-bold cursor-pointer ${`${
+                        active.name === options.name
+                          ? "bg-primary rounded-r-full text-white"
+                          : "hover:bg-primary/20 rounded-r-full"
+                      } `} `}
+                      onClick={() => {
+                        dispatch(activeItem(options));
+                      }}
+                    >
+                      <Icon type="board" />
+                      {options.name}
+                    </div>
+                  );
+                })}
+              </>
+            )}
 
-              <div
-                onClick={() => {
-                  setIsOpen(true);
-                }}
-                className="pl-6 my-2 font-bold cursor-pointer text-primary hover:opacity-20"
-              >
-                + Create New Board
-              </div>
+            <div
+              onClick={() => {
+                setIsOpen(true);
+              }}
+              className="pl-6 my-2 font-bold cursor-pointer text-primary hover:opacity-20"
+            >
+              + Create New Board
             </div>
           </div>
+        </div>
 
-          <div className="mx-auto w-4/5 mb-4">
-            <div
-              className="flex items-center text-xs gap-x-6 p-2 bg-secondary-dark 
+        <div className="mx-auto w-4/5 mb-4">
+          <div
+            className="flex items-center text-xs gap-x-6 p-2 bg-secondary-dark 
       justify-center rounded-md"
-            >
-              <MdLightMode />
-              <ToggleBtn />
-              <BsMoonStarsFill />
-            </div>
+          >
+            <MdLightMode />
+            <ToggleBtn />
+            <BsMoonStarsFill />
+          </div>
+          {isMobile && (
             <button
               onClick={() => {
-                setShow(false);
+                setShow ? setShow(false) : null;
               }}
               className="cursor-pointer border-none inline-flex items-center gap-x-2 text-xs my-4"
             >
               <MdVisibilityOff /> Hide Sidebar
             </button>
-          </div>
+          )}
         </div>
-      )}
+      </div>
 
       <Modal open={isOpen} handleClose={() => setIsOpen(false)}>
         <AddBoard handleClose={() => setIsOpen(false)} />

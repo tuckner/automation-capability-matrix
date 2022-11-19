@@ -1,13 +1,19 @@
 import Modal from "components/Modal";
 import { useState } from "react";
 import { ISubTask, ITask } from "types";
+import AddTask from "./AddTask";
 import TaskDetails from "./TaskDetails";
 
-type Props = { tasks: ITask; filtered: ISubTask[]; index: number };
+type Props = {
+  tasks: ITask;
+  filtered: ISubTask[];
+  index: number;
+};
 
 export default function TaskItem({ tasks, filtered, index }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const [isOpenModal, setOpenModal] = useState(false);
+
   return (
     <>
       <div
@@ -24,13 +30,26 @@ export default function TaskItem({ tasks, filtered, index }: Props) {
         </p>
       </div>
 
-      <Modal open={isOpen} handleClose={() =>setIsOpen(false)}>
-        <TaskDetails
-          filtered={filtered}
-          subtasks={tasks.subtasks}
+      <Modal
+        children={
+          <TaskDetails
+            filtered={filtered}
+            subtasks={tasks.subtasks}
+            tasks={tasks}
+            handleClose={() => setIsOpen(false)}
+            index={index}
+            setOpenModal={setOpenModal}
+          />
+        }
+        open={isOpen}
+        handleClose={() => setIsOpen(false)}
+      />
+
+      <Modal open={isOpenModal} handleClose={() => setOpenModal(false)}>
+        <AddTask
           tasks={tasks}
-          handleClose={() =>setIsOpen(false)}
           index={index}
+          handleClose={() => setOpenModal(false)}
         />
       </Modal>
     </>

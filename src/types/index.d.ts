@@ -42,11 +42,7 @@ export interface ISubTask {
   isCompleted: boolean;
 }
 
-export interface AppContextType {
+type SliceState = {
   board: IBoard[];
-  // platform: IBoard;
-  setBoard: Dispatch<SetStateAction<IBoard[]>>;
-  getInitialState:(currentItem?)=>void;
-  active:  IBoard;
-  setIsActive :Dispatch<SetStateAction<IBoard>>
-}
+  active: IBoard;
+};

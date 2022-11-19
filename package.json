@@ -8,10 +8,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@reduxjs/toolkit": "^1.9.0",
     "formik": "^2.2.9",
+    "framer-motion": "^7.6.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-redux": "^8.0.5",
+    "react-responsive": "^9.0.0",
     "react-router-dom": "6",
     "yup": "^0.32.11"
   },

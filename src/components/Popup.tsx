@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 
 type Props = {
   items: {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 function Popup({ items, setOpenMenu }: Props) {
-  const domRef = React.useRef<HTMLDivElement>(null);
+  const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClick = (e: any) => {
@@ -24,7 +24,8 @@ function Popup({ items, setOpenMenu }: Props) {
   return (
     <div
       ref={domRef}
-      className=" absolute py-2 text-sm shadow-lg dark:shadow-primary/20 shadow-gray/50 dark:bg-secondary bg-white right-5 top-5 rounded-md"
+      className="absolute py-2 text-sm shadow-lg dark:shadow-primary/20 shadow-gray/50 
+      dark:bg-secondary bg-white right-5 top-10 rounded-md"
     >
       <ul className="w-36">
         {items.map((list, i) => {

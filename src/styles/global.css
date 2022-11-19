@@ -10,8 +10,8 @@
     color: black;
     background-color: hsla(220, 69%, 97%, 1);
   }
-  .dark{
-    background-color: hsla(235, 16%, 15%,1);
+  .dark {
+    background-color: hsla(235, 16%, 15%, 1);
     color: hsla(0, 0%, 100%, 1);
   }
 
@@ -29,8 +29,7 @@
   html,
   body {
     height: 100%;
-    width:100%;
-    /* background-color: hsla(235, 16%, 15%, 1); */
+    width: 100%;
   }
 
   input,
@@ -38,45 +37,28 @@
   textarea,
   select {
     font: inherit;
-    background-color:transparent;
-    @apply border-gray/20 border-[2px]
+    background-color: transparent;
+    @apply border-gray/20 border-[2px];
   }
 
   body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     font-family: "Plus Jakarta Sans", sans-serif;
-    overflow:hidden;
+    overflow: hidden;
     height: 100%;
-    width:100%;
- 
-
+    width: 100%;
   }
-
-  /* ol,
-ul {
-  list-style: none;
-  padding: 0;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px hsla(235, 16%, 15%, 1);
+  border-radius: 10px;
 }
 
-input,
-textarea {
-  border: 0;
-  outline: 0;
-}
-
-button {
-  background: inherit;
-  border: 0;
-  outline: inherit;
-  cursor: pointer;
-} */
-
-  /* button:focus-visible {
-  outline: 2px solid #dd9951;
-} */
-
-  /* input[type="checkbox"] :focus-visible {
-  outline: 2px solid #dd9951;
-} */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(173, 168, 168, 0.5);
 }

@@ -1,18 +1,21 @@
-import { useContext } from "react";
 import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
 import { SubtaskInput, TextInput } from "components/InputField";
-import { AppContextType, IBoard, IColumn } from "types";
-import { AppContext } from "context";
-
+import { IBoard, IColumn } from "types";
+import { editBoard, appData, addBoard } from "redux/boardSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { checkDuplicatesBoard } from "utilis";
+import { useToast } from '@chakra-ui/react'
 type Props = {
-  handleClose: () => void;
   active?: IBoard;
+  handleClose: () => void;
 };
 function AddBoard({ handleClose, active }: Props) {
-  const { board, getInitialState, setBoard } = useContext(
-    AppContext
-  ) as AppContextType;
+  const dispatch = useDispatch();
+  const data = useSelector(appData);
+  const { board } = data;
+  const toast = useToast()
+
   const TaskSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
     columns: Yup.array()
@@ -25,17 +28,24 @@ function AddBoard({ handleClose, active }: Props) {
       .min(1, "Add an item."),
   });
   const addBoardHandler = (values: IBoard) => {
-    localStorage.setItem("board", JSON.stringify([...board, values]));
+    const foundDuplicate = checkDuplicatesBoard(values, board);
+    if (foundDuplicate === false) {
+      dispatch(addBoard(values));
+    } else {
+     toast({
+          title: 'Item already exist.',
+          position: 'top',
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+        })
+    }
+
     handleClose();
-    getInitialState(values);
   };
   const editBoardHandler = (values: IBoard) => {
-    const updatedBoard = board.map((item: IBoard) =>
-      item.name === active?.name ? { ...item, ...values } : item
-    );
-    localStorage.setItem("board", JSON.stringify(updatedBoard));
+    dispatch(editBoard(values));
     handleClose();
-    getInitialState(values);
   };
 
   return (
