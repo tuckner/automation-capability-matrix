@@ -102,12 +102,11 @@ const boardSlice = createSlice({
       );
     },
     isCompletedToggle: (state, action) => {
-      console.log(action.payload);
       state.board.find((item: IBoard) =>
         item.name === state.active.name
           ? item.columns.find((o: IColumn) =>
               o.name === action.payload.tasks.status
-                ? o.tasks.find((s: ITask) =>
+                ? o.tasks.map((s: ITask) =>
                     s.title === action.payload.tasks.title
                       ? s.subtasks.map((t: ISubTask, i: number) =>
                           i === action.payload.id

@@ -24,7 +24,7 @@ function Popup({ items, setOpenMenu }: Props) {
   return (
     <div
       ref={domRef}
-      className="absolute py-2 text-sm shadow-lg dark:shadow-primary/20 shadow-gray/50 
+      className=" z-40 absolute py-2 text-sm shadow-lg dark:shadow-primary/20 shadow-gray/50 
       dark:bg-secondary bg-white right-5 top-10 rounded-md"
     >
       <ul className="w-36">

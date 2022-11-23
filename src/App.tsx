@@ -5,7 +5,7 @@ import Board from "components/Board";
 import { MdVisibilityOff } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
 import { Fade, ScaleFade, Slide, SlideFade, Collapse } from "@chakra-ui/react";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 function App() {
   const [show, setShow] = useState<boolean>(true);
@@ -45,14 +45,13 @@ function App() {
             <div
               style={{
                 marginLeft:
-                  show && isMobile
-                    ? "clamp(300px, 10vw, 500px)"
-                    : "0px",
+                  show && isMobile ? "clamp(300px, 10vw, 500px)" : "0px",
               }}
               className={` h-[33rem] py-4 mb-8 pr-8 transition duration-700 ${
                 isMobile ? "pl-8" : "pl-8"
               }`}
             >
+              
               <Board />
             </div>
           </div>
@@ -82,6 +81,7 @@ export default App;
 // //check the implication of using context, could props be used for this
 //// learn redux with this appllication
 // use Animation where necessary
+// refactor data
 // //review codes and refactor were necessary
 //// review file structure
 // // Add confirmation popup for deleteorcancel
@@ -89,4 +89,4 @@ export default App;
 //// work on view
 // //check duplicates
 // // add alert popup for duplicate item
-// fix header issh with  create new board
+// //fix header issh with  create new board
