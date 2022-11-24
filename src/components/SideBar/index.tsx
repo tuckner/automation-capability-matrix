@@ -25,7 +25,7 @@ export default function index({ setShow }: Props) {
   return (
     <>
       <div
-        className={`text-gray bg-white dark:bg-secondary ${
+        className={` text-gray bg-white dark:bg-secondary ${
           isMobile && " pr-4 pb-24 border-r-[1px] border-gray/20"
         } 
      pt-4  flex 
@@ -36,12 +36,12 @@ export default function index({ setShow }: Props) {
           <div>
             {board && (
               <>
-                {board.map((options: IBoard, index: number) => {
+                {board.map((options: IBoard) => {
                   return (
                     <div
-                      key={index}
+                      key={options.id}
                       className={`py-3 px-6 flex items-center gap-x-4 font-bold cursor-pointer ${`${
-                        active.name === options.name
+                        active.id === options.id
                           ? "bg-primary rounded-r-full text-white"
                           : "hover:bg-primary/20 rounded-r-full"
                       } `} `}

@@ -3,11 +3,12 @@ import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
 import SelectBox from "components/SelectBox";
 import { TextInput, TextArea, SubtaskInput } from "../InputField";
-import { IColumn, ISubTask, ITask } from "types";
+import { IBoard, IColumn, ISubTask, ITask } from "types";
 import { appData, addTask, editTask, deleteTask } from "redux/boardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { checkDuplicatesTask } from "utilis";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
+import { v4 as uuidv4 } from "uuid";
 type Props = {
   handleClose: () => void;
   tasks?: ITask;
@@ -16,8 +17,8 @@ type Props = {
 export default function AddTask({ handleClose, tasks }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
-  const { active } = data;
-  const toast = useToast()
+  const active: IBoard = data.active;
+  const toast = useToast();
 
   const [selectedStatus, setStatus] = useState<string | any>(
     tasks
@@ -44,19 +45,20 @@ export default function AddTask({ handleClose, tasks }: Props) {
   });
 
   const addTaskHandler = (values: ITask) => {
+
     values.status = selectedStatus;
-    let item
-    const foundDuplicate = checkDuplicatesTask(values,  active);
+
+    const foundDuplicate = checkDuplicatesTask(values, active);
     if (foundDuplicate === false) {
-      dispatch(addTask(values));
+      dispatch(addTask({ updatedTasks: values, position: 0 }));
     } else {
       toast({
-        title: 'Item already exist.',
-        position: 'top',
-        status: 'error',
+        title: "Item already exist.",
+        position: "top",
+        status: "error",
         duration: 2000,
         isClosable: true,
-      })
+      });
     }
 
     handleClose();
@@ -66,8 +68,11 @@ export default function AddTask({ handleClose, tasks }: Props) {
     if (values.status === selectedStatus) {
       dispatch(editTask({ values, tasks }));
     } else {
-      values.status = selectedStatus;
-      dispatch(addTask(values));
+      const updatedTasks = {
+        ...values,
+        status: selectedStatus,
+      };
+      dispatch(addTask({ updatedTasks, position: 0 }));
       dispatch(deleteTask(tasks));
     }
     handleClose();
@@ -81,12 +86,14 @@ export default function AddTask({ handleClose, tasks }: Props) {
           initialValues={
             tasks
               ? {
+                  id: tasks.id,
                   title: tasks.title,
                   description: tasks.description,
                   status: tasks.status,
                   subtasks: tasks.subtasks,
                 }
               : {
+                  id: uuidv4(),
                   title: "",
                   description: "",
                   status: selectedStatus,
@@ -128,7 +135,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                         values.subtasks.length > 0 &&
                         values.subtasks.map((task: ISubTask, index: number) => (
                           <SubtaskInput
-                            key={index}
+                            key={task.id}
                             index={index}
                             name={`subtasks.${index}.title`}
                             arrayHelpers={arrayHelpers}
@@ -139,6 +146,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                         type="button"
                         onClick={() => {
                           arrayHelpers.push({
+                            id: uuidv4(),
                             title: "",
                             isCompleted: false,
                           });

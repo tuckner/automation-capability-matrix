@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IBoard, IColumn, ISubTask, ITask, SliceState } from "types";
+import { IBoard, IColumn, ISubTask, ITask } from "types";
 import { loadState } from "utilis";
 import type { RootState } from "./store";
 
@@ -16,14 +16,14 @@ const boardSlice = createSlice({
         return {
           ...state,
           active: state.board.find(
-            (item: IBoard, index: number) => item.name === action.payload.name
+            (item: IBoard) => item.id === action.payload.id
           ),
         };
       }
     },
     deleteBoard: (state, action) => {
       const filteredBoard: IBoard[] = state.board.filter(
-        (item: any) => item.name !== action.payload.name
+        (item: IBoard) => item.id !== action.payload.id
       );
       return {
         board: filteredBoard,
@@ -35,32 +35,36 @@ const boardSlice = createSlice({
     addBoard: (state, action) => {
       state.board.push(action.payload);
       state.active = state.board.find(
-        (item: IBoard, index: number) => item.name === action.payload.name
+        (item: IBoard) => item.id === action.payload.id
       );
     },
     editBoard: (state, action) => {
       const updatedBoard: IBoard[] = state.board.map((item: IBoard) =>
-        item.name === state.active.name ? { ...item, ...action.payload } : item
+        item.id === state.active.id ? { ...item, ...action.payload } : item
       );
       return {
         board: updatedBoard,
         active: updatedBoard.find(
-          (item: IBoard, index: number) => item.name === action.payload.name
+          (item: IBoard) => item.id === action.payload.id
         ),
       };
     },
     addTask: (state, action) => {
       state.board.find((item: IBoard) =>
-        item.name === state.active.name
+        item.id === state.active.id
           ? item.columns.find((o: IColumn) =>
-              o.name === action.payload.status
-                ? o.tasks.push(action.payload)
+              o.name === action.payload.updatedTasks.status
+                ? o.tasks.splice(
+                    action.payload.position,
+                    0,
+                    action.payload.updatedTasks
+                  )
                 : null
             )
           : null
       );
       state.active = state.board.find(
-        (item: IBoard, index: number) => item.name === state.active.name
+        (item: IBoard) => item.id === state.active.id
       );
     },
 
@@ -77,7 +81,7 @@ const boardSlice = createSlice({
           : null
       );
       state.active = state.board.find(
-        (item: IBoard, index: number) => item.name === state.active.name
+        (item: IBoard) => item.id === state.active.id
       );
     },
     editTask: (state, action) => {
@@ -98,7 +102,7 @@ const boardSlice = createSlice({
           : null
       );
       state.active = state.board.find(
-        (item: IBoard, index: number) => item.name === state.active.name
+        (item: IBoard) => item.id === state.active.id
       );
     },
     isCompletedToggle: (state, action) => {
@@ -123,7 +127,7 @@ const boardSlice = createSlice({
           : null
       );
       state.active = state.board.find(
-        (item: IBoard, index: number) => item.name === state.active.name
+        (item: IBoard) => item.id === state.active.id
       );
     },
   },
@@ -140,6 +144,3 @@ export const {
 } = boardSlice.actions;
 export const appData = (state: RootState) => state.board;
 export default boardSlice.reducer;
-
-// i learnt mutablilty and immutabilty of redux
-// you can't use both. you are using return(regular) or Immer method

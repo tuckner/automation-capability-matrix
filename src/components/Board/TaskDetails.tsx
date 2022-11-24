@@ -1,4 +1,4 @@
-import { IColumn, ISubTask, ITask } from "types";
+import { IBoard, IColumn, ISubTask, ITask } from "types";
 import { FiMoreVertical } from "react-icons/fi";
 import SelectBox from "../SelectBox";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -26,7 +26,7 @@ export default function TaskDetails({
 }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
-  const { active } = data;
+  const active: IBoard = data.active;
 
   const [selectedStatus, setStatus] = useState<string | any>(
     tasks

@@ -5,7 +5,8 @@ import { IBoard, IColumn } from "types";
 import { editBoard, appData, addBoard } from "redux/boardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { checkDuplicatesBoard } from "utilis";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
+import { v4 as uuidv4 } from "uuid";
 type Props = {
   active?: IBoard;
   handleClose: () => void;
@@ -13,8 +14,8 @@ type Props = {
 function AddBoard({ handleClose, active }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
-  const { board } = data;
-  const toast = useToast()
+  const  board :IBoard[] = data.board;
+  const toast = useToast();
 
   const TaskSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
@@ -32,13 +33,13 @@ function AddBoard({ handleClose, active }: Props) {
     if (foundDuplicate === false) {
       dispatch(addBoard(values));
     } else {
-     toast({
-          title: 'Item already exist.',
-          position: 'top',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-        })
+      toast({
+        title: "Item already exist.",
+        position: "top",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
     }
 
     handleClose();
@@ -57,14 +58,8 @@ function AddBoard({ handleClose, active }: Props) {
         <Formik
           initialValues={
             active
-              ? {
-                  name: active.name,
-                  columns: active.columns,
-                }
-              : {
-                  name: "",
-                  columns: [],
-                }
+              ? { id: active.id, name: active.name, columns: active.columns }
+              : { id: uuidv4(), name: "", columns: [] }
           }
           validationSchema={TaskSchema}
           validateOnChange={false}
@@ -91,7 +86,7 @@ function AddBoard({ handleClose, active }: Props) {
                         values.columns.length > 0 &&
                         values.columns.map((task: IColumn, index: number) => (
                           <SubtaskInput
-                            key={index}
+                            key={task.id}
                             index={index}
                             name={`columns.${index}.name`}
                             arrayHelpers={arrayHelpers}
@@ -102,6 +97,7 @@ function AddBoard({ handleClose, active }: Props) {
                         type="button"
                         onClick={() => {
                           arrayHelpers.push({
+                            id: Number(uuidv4()),
                             name: "",
                             tasks: [],
                           });

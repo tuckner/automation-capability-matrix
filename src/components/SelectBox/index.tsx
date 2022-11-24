@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import "./style.css";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
-import { IColumn, ITask } from "types";
+import { IBoard, IColumn, ITask } from "types";
 import { addTask, appData, deleteTask } from "redux/boardSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 interface Props {
   selectedStatus: string;
   setStatus: Dispatch<SetStateAction<string>>;
@@ -14,7 +15,7 @@ interface Props {
 export default function index({ selectedStatus, setStatus, tasks }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
-  const { active } = data;
+  const  active:IBoard  = data.active;
   const [isOpen, setOpen] = useState(false);
 
   const toggleDropdown = () => setOpen(!isOpen);
@@ -24,9 +25,10 @@ export default function index({ selectedStatus, setStatus, tasks }: Props) {
     if (tasks?.status !== title && tasks !== undefined) {
       const updatedTasks = {
         ...tasks,
+        id: uuidv4(),
         status: title,
       };
-      dispatch(addTask(updatedTasks));
+      dispatch(addTask({ updatedTasks, position: 0 }));
       dispatch(deleteTask(tasks));
     }
   };
@@ -64,7 +66,7 @@ export default function index({ selectedStatus, setStatus, tasks }: Props) {
                     String(e.currentTarget.getAttribute("data-title"))
                   )
                 }
-                key={i}
+                key={item.id}
                 data-title={item.name}
               >
                 {item.name}

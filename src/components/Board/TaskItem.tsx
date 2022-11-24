@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ISubTask, ITask } from "types";
 import AddTask from "./AddTask";
 import TaskDetails from "./TaskDetails";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@hello-pangea/dnd";
 
 type Props = {
   tasks: ITask;
@@ -18,19 +18,22 @@ export default function TaskItem({ tasks, filtered, index }: Props) {
   return (
     <>
       <Draggable 
-       key={index} draggableId={index.toString()} index={index}>
-      {/* <Draggable draggableId={String(index)} index={index}> */}
+       key={tasks.id} draggableId={tasks.id.toString()} index={index}>
+
         {(provided, snapshot) => {
           return (
             <div
+           
             ref={provided.innerRef}
+            data-snapshot={snapshot}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
               data-id={index}
               onClick={() => {
                 setIsOpen(true);
               }}
-              className="hover:opacity-60 shadow-lg  cursor-pointer bg-white dark:bg-secondary mb-4 rounded-lg py-6 px-4"
+              className="hover:opacity-60 shadow-lg  
+              cursor-pointer bg-white dark:bg-secondary mb-4 rounded-lg py-6 px-4"
             >
               <p className="font-bold text-sm">{tasks.title} </p>
               <p className="pt-2 text-xs text-gray font-bold">

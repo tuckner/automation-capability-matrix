@@ -21,13 +21,10 @@ export const saveState = (state: any) => {
   try {
     const serializesState = JSON.stringify(state);
     localStorage.setItem("boarddata", serializesState);
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 export const checkDuplicatesBoard = (values: IBoard, board: IBoard[]) => {
-
   return board.some((el: IBoard) => el.name === values.name);
 };
 
@@ -42,4 +39,9 @@ export const checkDuplicatesTask = (values: ITask, active: IBoard) => {
       : null
   );
   return foundTask !== undefined ? true : false;
+};
+
+export const randomColor = () => {
+  const randomNumber = Math.floor(Math.random() * 16777215).toString(16);
+  return `#${randomNumber}`;
 };

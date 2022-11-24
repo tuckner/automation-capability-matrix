@@ -1,38 +1,59 @@
 import Modal from "components/Modal";
 import { useState } from "react";
 import { BsCircleFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import { appData } from "redux/boardSlice";
-import { IColumn, ITask } from "../../types";
+import { useDispatch, useSelector } from "react-redux";
+import { IBoard, IColumn, ITask } from "../../types";
 import AddBoard from "./AddBoard";
 import AddTask from "./AddTask";
 import TaskItem from "./TaskItem";
-import { DragDropContext } from "react-beautiful-dnd";
-import { Droppable } from "react-beautiful-dnd";
+import { addTask, appData, deleteTask } from "redux/boardSlice";
+import { Droppable, DragDropContext } from "@hello-pangea/dnd";
+
+
+import { v4 as uuidv4 } from "uuid";
+
 export default function index() {
   const data = useSelector(appData);
-  const { active } = data;
+  const dispatch = useDispatch();
+  const active: IBoard = data.active;
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenBoard, setOpenBoard] = useState(false);
 
   const onDragEnd = (result: any) => {
-    console.log(result);
     if (!result.destination) {
       return;
     }
+
+    const activeCopy = { ...active };
+    const sourceList = activeCopy.columns.find(
+      (item: IColumn) => item.name === result.source.droppableId
+    );
+    let sourceTask = sourceList?.tasks.find(
+      (item: ITask, index:number) => index === result.source.index);
+
+    dispatch(deleteTask(sourceTask));
+    const updatedTasks = {
+      ...sourceTask,
+      id: uuidv4(),
+      status: result.destination.droppableId,
+    };
+const position =result.destination.index
+    dispatch(addTask({updatedTasks, position}));
   };
+
+ 
 
   return (
     <>
-      <div className=" h-full flex gap-x-10 w-full">
+      <div className=" z-10 h-full flex gap-x-10 w-full">
         {active ? (
           <DragDropContext onDragEnd={onDragEnd}>
-            {active.columns?.map((item: IColumn, index: number) => {
+            {active.columns?.map((item: IColumn) => {
               return (
                 <div
-                  key={index.toString()}
-                  data-id={index}
-                  className="w-[250px] shrink-0 "
+                  key={item.name}
+                  // data-id={index}
+                  className="w-[250px] shrink-0"
                 >
                   <p
                     className="flex gap-x-3 items-center text-gray 
@@ -41,24 +62,24 @@ export default function index() {
                     {" "}
                     <BsCircleFill
                       className={`${
-                        item.name === "Todo"
+                        item.id === "0"
                           ? "fill-sky-blue"
-                          : item.name === "Doing"
+                          : item.id === "1"
                           ? "fill-purple"
                           : "fill-sea-green"
                       }  `}
                     />
                     {item.name} ({item.tasks.length})
                   </p>
-
-                  <div className="mt-4 h-full">
-                    {item.tasks.length > 0 ? (
-                      <Droppable droppableId={`${String(index)}`}>
-                        {(provided) => (
-                          <div
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                          >
+                  <Droppable droppableId={`${item.name}`}>
+                    {(provided) => (
+                      <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        className="mt-4 h-full"
+                      >
+                        {item.tasks.length > 0 ? (
+                          <div>
                             {item.tasks.map((tasks: ITask, index: number) => {
                               const filtered = tasks.subtasks.filter(
                                 (item) => item.isCompleted === true
@@ -67,41 +88,25 @@ export default function index() {
                                 <TaskItem
                                   tasks={tasks}
                                   filtered={filtered}
-                                  key={index.toString()}
+                                  key={tasks.id}
                                   index={index}
                                 />
                               );
                             })}
-                            {provided.placeholder}
+                          </div>
+                        ) : (
+                          <div className="w-[250px] shrink-0 h-full">
+                            <div className="h-full dark:bg-secondary/20 border-dashed border-2 border-gray rounded-lg"></div>
                           </div>
                         )}
-                      </Droppable>
-                    ) : (
-                      <div className="w-[250px] shrink-0 h-full">
-                        <div className="h-full dark:bg-secondary/20 border-dashed border-2 border-gray rounded-lg"></div>
+                        {provided.placeholder}
                       </div>
                     )}
-                  </div>
+                  </Droppable>
                 </div>
               );
             })}
 
-            <div className="mt-8 h-full w-[250px]  shrink-0 ">
-              <div
-                onClick={() => setIsOpen(true)}
-                className=" h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
-              >
-                <p className="text-xl  text-gray font-bold"> + New Column</p>
-              </div>
-            </div>
-            <div className="mt-8 h-full w-[250px]  shrink-0 ">
-              <div
-                onClick={() => setIsOpen(true)}
-                className=" h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
-              >
-                <p className="text-xl  text-gray font-bold"> + New Column</p>
-              </div>
-            </div>
             <div className="mt-8 h-full w-[250px]  shrink-0 ">
               <div
                 onClick={() => setIsOpen(true)}

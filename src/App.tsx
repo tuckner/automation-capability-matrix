@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { Fade, ScaleFade, Slide, SlideFade, Collapse } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
+
 function App() {
   const [show, setShow] = useState<boolean>(true);
 
@@ -33,7 +34,7 @@ function App() {
             {isMobile && (
               <Collapse in={show} animateOpacity>
                 <div
-                  className={` h-screen fixed w-72  ${
+                  className={`z-20 h-screen fixed w-72  ${
                     show ? "block" : "hidden"
                   }`}
                 >
@@ -41,19 +42,19 @@ function App() {
                 </div>
               </Collapse>
             )}
+          
+              <div
+                style={{
+                  marginLeft:
+                    show && isMobile ? "clamp(300px, 10vw, 500px)" : "0px",
+                }}
+                className={` z-0 h-[33rem] py-4 mb-8 pr-8 transition duration-700 ${
+                  isMobile ? "pl-8" : "pl-8"
+                }`}
+              >
+                <Board />
+              </div>
 
-            <div
-              style={{
-                marginLeft:
-                  show && isMobile ? "clamp(300px, 10vw, 500px)" : "0px",
-              }}
-              className={` h-[33rem] py-4 mb-8 pr-8 transition duration-700 ${
-                isMobile ? "pl-8" : "pl-8"
-              }`}
-            >
-              
-              <Board />
-            </div>
           </div>
         </div>
 
@@ -76,12 +77,13 @@ function App() {
 export default App;
 
 // todo
-// drag and drop
+// // drag and drop
 // //refactor getinitial
 // //check the implication of using context, could props be used for this
 //// learn redux with this appllication
-// use Animation where necessary
-// refactor data
+// //use Animation where necessary
+// //refactor data
+// random color selection
 // //review codes and refactor were necessary
 //// review file structure
 // // Add confirmation popup for deleteorcancel

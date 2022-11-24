@@ -13,6 +13,7 @@ import { FiChevronDown } from "react-icons/fi";
 import SideBar from "./SideBar";
 import { useSelector } from "react-redux";
 import { appData } from "redux/boardSlice";
+import { IBoard } from "types";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function Header() {
   const [showDowndrop, setShowDropDown] = useState(false);
 
   const data = useSelector(appData);
-  const { active } = data;
+  const active: IBoard = data.active;
 
   const editBoard = () => {
     setOpenBoard(true);
@@ -62,19 +63,6 @@ export default function Header() {
                   <span>
                     <FiChevronDown className="inline vertical-bottom" />
                   </span>
-                  <div className="absolute top-10">
-                    {showDowndrop && (
-                      <>
-                        <Modal
-                          showDowndrop={showDowndrop}
-                          open={showDowndrop}
-                          handleClose={() => setShowDropDown(false)}
-                        >
-                          <SideBar />
-                        </Modal>
-                      </>
-                    )}
-                  </div>
                 </div>
               )}
               <div className="flex items-center">
@@ -136,6 +124,18 @@ export default function Header() {
             },
           ]}
         />
+      )}
+
+      {showDowndrop && !isMobile && (
+        <div className="absolute top-10">
+          <Modal
+            showDowndrop={showDowndrop}
+            open={showDowndrop}
+            handleClose={() => setShowDropDown(false)}
+          >
+            <SideBar />
+          </Modal>
+        </div>
       )}
     </>
   );

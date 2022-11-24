@@ -11,6 +11,7 @@
     "@chakra-ui/react": "^2.4.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@hello-pangea/dnd": "^16.0.1",
     "@reduxjs/toolkit": "^1.9.0",
     "@types/react-beautiful-dnd": "^13.1.2",
     "formik": "^2.2.9",
@@ -19,9 +20,11 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-indiana-drag-scroll": "^3.0.1-alpha",
     "react-redux": "^8.0.5",
     "react-responsive": "^9.0.0",
     "react-router-dom": "6",
+    "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
   },
   "devDependencies": {
