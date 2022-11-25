@@ -12,6 +12,7 @@ function App() {
   const [show, setShow] = useState<boolean>(true);
 
   useEffect(() => {
+    localStorage.setItem("theme", "dark");
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
@@ -59,6 +60,7 @@ function App() {
         </div>
 
         <button
+         aria-label="Visibilityoff"
           onClick={() => {
             setShow(true);
           }}

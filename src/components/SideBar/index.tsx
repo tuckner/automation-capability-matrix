@@ -18,7 +18,8 @@ export default function index({ setShow }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
   const data = useSelector(appData);
-  const { active, board } = data;
+  const active: IBoard = data.active;
+  const board: IBoard[] = data.board;
 
   const isMobile = useMediaQuery({ query: "(min-width: 700px)" });
 
@@ -79,6 +80,7 @@ export default function index({ setShow }: Props) {
           </div>
           {isMobile && (
             <button
+              aria-label="Hide Sidebar"
               onClick={() => {
                 setShow ? setShow(false) : null;
               }}

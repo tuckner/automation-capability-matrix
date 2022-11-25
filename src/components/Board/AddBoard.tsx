@@ -93,6 +93,7 @@ function AddBoard({ handleClose, active }: Props) {
                           />
                         ))}
                       <button
+                       aria-label="Add Column"
                         className="bg-white mt-3 font-bold text-sm text-primary p-2 w-full rounded-full"
                         type="button"
                         onClick={() => {
@@ -121,6 +122,7 @@ function AddBoard({ handleClose, active }: Props) {
               </div>
 
               <button
+               aria-label="Board"
                 className="bg-primary p-2 w-full text-sm rounded-full"
                 type="submit"
               >

@@ -14,7 +14,7 @@ const theme = extendTheme({
       body: {
         fontFamily: null,
         lineHeight: null,
-        bg:"",
+        bg:null,
         color:null
       }
     })

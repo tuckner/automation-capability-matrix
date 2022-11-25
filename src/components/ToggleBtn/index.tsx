@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export default function index() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  const [theme, setTheme] = useState("dark");
+
   return (
     <div
       onClick={() => {
@@ -19,7 +20,7 @@ export default function index() {
     >
       <div
         className={`rounded-full bg-white p-2 w-[20px] h-[20px] transition ease-in-out duration-[0.4s]
-      ${theme === "dark" && "translate-x-7"}`}
+      ${theme === "dark" ? "translate-x-7": ""}`}
       ></div>
     </div>
   );

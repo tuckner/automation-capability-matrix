@@ -40,7 +40,7 @@ export default function Header() {
           </div>
         ) : (
           <div className="border-gray/20 p-6 cursor-pointer">
-            <img src={logoMobile} alt="logo" />
+            <img src={logoMobile} alt="logo" className="w-10 h-10" />
           </div>
         )}
         <div
@@ -67,6 +67,7 @@ export default function Header() {
               )}
               <div className="flex items-center">
                 <button
+                 aria-label="Add Task"
                   onClick={() => setIsOpen(true)}
                   className={`rounded-full bg-primary text-sm font-bold text-white ${
                     !isMobile ? "w-[40px]" : "w-32"

@@ -41,6 +41,7 @@ export default function Delete({
       </p>
       <div className="text-center flex items-center justify-around mt-8">
         <button
+         aria-label="Delete"
           className="py-2 w-40 hover:bg-error/10 px-4 rounded-md bg-error font-bold"
           type="button"
           onClick={isDeleteBoard ? deleteBoardHandler : deleteTaskHandler}
@@ -49,6 +50,7 @@ export default function Delete({
           Delete
         </button>
         <button
+         aria-label="Cancel"
           className="py-2 w-40 hover:bg-error/10 duration-300 px-4 rounded-md"
           type="button"
           onClick={handleClose}
