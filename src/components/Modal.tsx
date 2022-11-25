@@ -1,3 +1,4 @@
+import { useMediaQuery } from "react-responsive";
 type Props = {
   open: boolean;
   handleClose: () => void;
@@ -11,6 +12,8 @@ export default function Modal({
   handleClose,
   showDowndrop,
 }: Props) {
+  const isMobile = useMediaQuery({ query: "(min-width: 700px)" });
+
   return (
     <>
       {open && (
@@ -23,7 +26,7 @@ export default function Modal({
             className={`z-30 rounded-lg ${
               showDowndrop
                 ? " w-72 p-2 top-[13rem]"
-                : "w-[28rem] p-6  top-[50%] "
+                : `${!isMobile && 'w-[22rem]'} w-[28rem] p-6  top-[50%]` 
             }  fixed bg-white dark:bg-secondary 
             -translate-y-[50%] -translate-x-[50%] left-[50%] rounded-lg`}
           >

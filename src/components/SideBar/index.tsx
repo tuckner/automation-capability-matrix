@@ -12,9 +12,10 @@ import { appData, activeItem } from "redux/boardSlice";
 
 type Props = {
   setShow?: Dispatch<SetStateAction<boolean>>;
+  handleClose?: () => void;
 };
 
-export default function index({ setShow }: Props) {
+export default function index({ setShow, handleClose }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
   const data = useSelector(appData);
@@ -26,11 +27,11 @@ export default function index({ setShow }: Props) {
   return (
     <>
       <div
-        className={` text-gray bg-white dark:bg-secondary ${
-          isMobile && " pr-4 pb-24 border-r-[1px] border-gray/20"
+        className={`text-gray bg-white dark:bg-secondary ${
+          isMobile && "pr-4 pb-24 border-r-[1px] border-gray/20"
         } 
-     pt-4  flex 
-        flex-col justify-between h-full left-0 `}
+     pt-4 flex 
+        flex-col justify-between h-full left-0`}
       >
         <div>
           <p className="pl-6 py-2 text-xs">ALL BOARDS({board.length})</p>
@@ -48,6 +49,9 @@ export default function index({ setShow }: Props) {
                       } `} `}
                       onClick={() => {
                         dispatch(activeItem(options));
+                        if (handleClose) {
+                          handleClose();
+                        }
                       }}
                     >
                       <Icon type="board" />

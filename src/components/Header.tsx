@@ -27,6 +27,7 @@ export default function Header() {
 
   const editBoard = () => {
     setOpenBoard(true);
+    setOpenMenu(false);
   };
   const isMobile = useMediaQuery({ query: "(min-width: 700px)" });
   return (
@@ -45,7 +46,7 @@ export default function Header() {
         )}
         <div
           className={`flex items-center justify-between w-full ${
-            isMobile ? "px-4" : " pr-4"
+            isMobile ? "px-4" : "pr-4"
           }`}
         >
           {active ? (
@@ -67,7 +68,7 @@ export default function Header() {
               )}
               <div className="flex items-center">
                 <button
-                 aria-label="Add Task"
+                  aria-label="Add Task"
                   onClick={() => setIsOpen(true)}
                   className={`rounded-full bg-primary text-sm font-bold text-white ${
                     !isMobile ? "w-[40px]" : "w-32"
@@ -121,7 +122,9 @@ export default function Header() {
             },
             {
               title: "Delete Board",
-              handler: () => setDeleteBoard(true),
+              handler: () => {
+                setDeleteBoard(true), setOpenMenu(false);
+              },
             },
           ]}
         />
@@ -134,7 +137,7 @@ export default function Header() {
             open={showDowndrop}
             handleClose={() => setShowDropDown(false)}
           >
-            <SideBar />
+            <SideBar handleClose={() => setShowDropDown(false)} />
           </Modal>
         </div>
       )}

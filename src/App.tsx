@@ -5,7 +5,7 @@ import Board from "components/Board";
 import { MdVisibilityOff } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
 import { Fade, ScaleFade, Slide, SlideFade, Collapse } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+
 
 
 function App() {
@@ -28,14 +28,16 @@ function App() {
 
   return (
     <>
-      <div className="w-full ">
+      <div className="w-full h-full">
         <Header />
+        <div className="w-full h-screen">
         <div className={`absolute top-[75px] overflow-auto w-full`}>
-          <div className={`transition duration-500 ease-in-out h-[87vh]`}>
+          
+             <div className={`transition duration-500 ease-in-out h-[87vh]`}>
             {isMobile && (
               <Collapse in={show} animateOpacity>
                 <div
-                  className={`z-20 h-screen fixed w-72  ${
+                  className={`z-20 h-screen fixed w-72 ${
                     show ? "block" : "hidden"
                   }`}
                 >
@@ -49,7 +51,7 @@ function App() {
                   marginLeft:
                     show && isMobile ? "clamp(300px, 10vw, 500px)" : "0px",
                 }}
-                className={` z-0 h-[33rem] py-4 mb-8 pr-8 transition duration-700 ${
+                className={`z-0 h-auto py-4 mb-8 pr-8 transition duration-700 ${
                   isMobile ? "pl-8" : "pl-8"
                 }`}
               >
@@ -57,6 +59,8 @@ function App() {
               </div>
 
           </div>
+          </div>
+         
         </div>
 
         <button
@@ -79,18 +83,5 @@ function App() {
 export default App;
 
 // todo
-// // drag and drop
-// //refactor getinitial
-// //check the implication of using context, could props be used for this
-//// learn redux with this appllication
-// //use Animation where necessary
-// //refactor data
 // random color selection
-// //review codes and refactor were necessary
-//// review file structure
-// // Add confirmation popup for deleteorcancel
-// //how do you update your object
-//// work on view
-// //check duplicates
-// // add alert popup for duplicate item
-// //fix header issh with  create new board
+

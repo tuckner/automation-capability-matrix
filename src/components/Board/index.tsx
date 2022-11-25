@@ -9,7 +9,6 @@ import TaskItem from "./TaskItem";
 import { addTask, appData, deleteTask } from "redux/boardSlice";
 import { Droppable, DragDropContext } from "@hello-pangea/dnd";
 
-
 import { v4 as uuidv4 } from "uuid";
 
 export default function index() {
@@ -29,7 +28,8 @@ export default function index() {
       (item: IColumn) => item.name === result.source.droppableId
     );
     let sourceTask = sourceList?.tasks.find(
-      (item: ITask, index:number) => index === result.source.index);
+      (item: ITask, index: number) => index === result.source.index
+    );
 
     dispatch(deleteTask(sourceTask));
     const updatedTasks = {
@@ -37,15 +37,13 @@ export default function index() {
       id: uuidv4(),
       status: result.destination.droppableId,
     };
-const position =result.destination.index
-    dispatch(addTask({updatedTasks, position}));
+    const position = result.destination.index;
+    dispatch(addTask({ updatedTasks, position }));
   };
 
- 
-
   return (
-    <>
-      <div className=" z-10 h-full flex gap-x-10 w-full">
+    <div className="w-[72rem] h-full">
+      <div className="mt-3 z-10 h-full flex gap-x-10 w-full">
         {active ? (
           <DragDropContext onDragEnd={onDragEnd}>
             {active.columns?.map((item: IColumn) => {
@@ -96,7 +94,7 @@ const position =result.destination.index
                           </div>
                         ) : (
                           <div className="w-[250px] shrink-0 h-full">
-                            <div className="h-full dark:bg-secondary/20 border-dashed border-2 border-gray rounded-lg"></div>
+                            <div className="h-screen dark:bg-secondary/20 border-dashed border-2 border-gray rounded-lg"></div>
                           </div>
                         )}
                         {provided.placeholder}
@@ -107,12 +105,12 @@ const position =result.destination.index
               );
             })}
 
-            <div className="mt-8 h-full w-[250px]  shrink-0 ">
+            <div className="mt-8 h-screen w-[250px] shrink-0 ">
               <div
                 onClick={() => setIsOpen(true)}
                 className=" h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
               >
-                <p className="text-xl  text-gray font-bold"> + New Column</p>
+                <p className="text-xl text-gray font-bold"> + New Column</p>
               </div>
             </div>
           </DragDropContext>
@@ -121,7 +119,7 @@ const position =result.destination.index
             onClick={() => {
               setOpenBoard(true);
             }}
-            className="font-bold  text-xl cursor-pointer text-primary hover:opacity-20
+            className="font-bold text-xl cursor-pointer text-primary hover:opacity-20
       fixed -translate-y-[50%] -translate-x-[50%] top-[50%] left-[50%]"
           >
             + Create New Board
@@ -141,6 +139,6 @@ const position =result.destination.index
           <AddTask handleClose={() => setIsOpen(false)} />
         )}
       </Modal>
-    </>
+    </div>
   );
 }
