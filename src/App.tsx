@@ -4,9 +4,7 @@ import SideBar from "components/SideBar";
 import Board from "components/Board";
 import { MdVisibilityOff } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
-import { Fade, ScaleFade, Slide, SlideFade, Collapse } from "@chakra-ui/react";
-
-
+import {  Collapse } from "@chakra-ui/react";
 
 function App() {
   const [show, setShow] = useState<boolean>(true);
@@ -31,40 +29,37 @@ function App() {
       <div className="w-full h-full">
         <Header />
         <div className="w-full h-screen">
-        <div className={`absolute top-[75px] overflow-auto w-full`}>
-          
-             <div className={`transition duration-500 ease-in-out h-[87vh]`}>
-            {isMobile && (
-              <Collapse in={show} animateOpacity>
-                <div
-                  className={`z-20 h-screen fixed w-72 ${
-                    show ? "block" : "hidden"
-                  }`}
-                >
-                  <SideBar setShow={setShow} />
-                </div>
-              </Collapse>
-            )}
-          
+          <div className={`absolute top-[75px] overflow-auto w-full`}>
+            <div className={` h-[87vh]`}>
+              {isMobile && (
+                <Collapse in={show} animateOpacity>
+                  <div
+                    className={`z-20 h-screen fixed w-72 ${
+                      show ? "block" : "hidden"
+                    }`}
+                  >
+                    <SideBar setShow={setShow} />
+                  </div>
+                </Collapse>
+              )}
+
               <div
                 style={{
                   marginLeft:
                     show && isMobile ? "clamp(300px, 10vw, 500px)" : "0px",
                 }}
-                className={`z-0 h-auto py-4 mb-8 pr-8 transition duration-700 ${
+                className={`z-0 h-auto py-4 mb-8 pr-8  ${
                   isMobile ? "pl-8" : "pl-8"
                 }`}
               >
                 <Board />
               </div>
-
+            </div>
           </div>
-          </div>
-         
         </div>
 
         <button
-         aria-label="Visibilityoff"
+          aria-label="Visibilityoff"
           onClick={() => {
             setShow(true);
           }}
@@ -83,5 +78,4 @@ function App() {
 export default App;
 
 // todo
-// random color selection
-
+// Add animation

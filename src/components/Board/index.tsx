@@ -8,6 +8,7 @@ import AddTask from "./AddTask";
 import TaskItem from "./TaskItem";
 import { addTask, appData, deleteTask } from "redux/boardSlice";
 import { Droppable, DragDropContext } from "@hello-pangea/dnd";
+import { randomColor } from "utilis";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,7 +18,9 @@ export default function index() {
   const active: IBoard = data.active;
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenBoard, setOpenBoard] = useState(false);
+  const [isEditBoard, setEditBoard] = useState(false);
 
+  console.log(active);
   const onDragEnd = (result: any) => {
     if (!result.destination) {
       return;
@@ -46,26 +49,23 @@ export default function index() {
       <div className="mt-3 z-10 h-full flex gap-x-10 w-full">
         {active ? (
           <DragDropContext onDragEnd={onDragEnd}>
-            {active.columns?.map((item: IColumn) => {
+            {active.columns?.map((item: IColumn, index: number) => {
               return (
-                <div
-                  key={item.name}
-                  // data-id={index}
-                  className="w-[250px] shrink-0"
-                >
+                <div key={item.name} className="w-[250px] shrink-0">
                   <p
                     className="flex gap-x-3 items-center text-gray 
             font-bold uppercase text-xs tracking-widest"
                   >
                     {" "}
                     <BsCircleFill
-                      className={`${
-                        item.id === "0"
-                          ? "fill-sky-blue"
-                          : item.id === "1"
-                          ? "fill-purple"
-                          : "fill-sea-green"
-                      }  `}
+                      style={{
+                        fill:
+                          index === 0
+                            ? "hsla(193, 75%, 59%,1)"
+                            : index === 1
+                            ? "hsla(249, 83% ,70%, 1)"
+                            : randomColor(),
+                      }}
                     />
                     {item.name} ({item.tasks.length})
                   </p>
@@ -107,7 +107,7 @@ export default function index() {
 
             <div className="mt-8 h-screen w-[250px] shrink-0 ">
               <div
-                onClick={() => setIsOpen(true)}
+                onClick={() => setEditBoard(true)}
                 className=" h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
               >
                 <p className="text-xl text-gray font-bold"> + New Column</p>
@@ -128,12 +128,14 @@ export default function index() {
       </div>
 
       <Modal
-        open={isOpen || isOpenBoard}
+        open={isOpen || isOpenBoard || isEditBoard}
         handleClose={() => {
-          setIsOpen(false), setOpenBoard(false);
+          setIsOpen(false), setOpenBoard(false), setEditBoard(false);
         }}
       >
-        {isOpenBoard ? (
+        {isEditBoard ? (
+          <AddBoard active={active} handleClose={() => setEditBoard(false)} />
+        ) : isOpenBoard ? (
           <AddBoard handleClose={() => setOpenBoard(false)} />
         ) : (
           <AddTask handleClose={() => setIsOpen(false)} />
