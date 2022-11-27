@@ -1,4 +1,4 @@
-# Kanban-App
+# Kanban-Task-Management- Application
 A task management board application for creating, reading, updating, and deleting boards and tasks; built with Vite React, TailwindCSS, Redux Toolkit and Typescript
 
 ## Overview
