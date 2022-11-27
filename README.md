@@ -17,7 +17,7 @@ yarn install
 yarn run dev
 ```
 
-### Features
+## Features
 users are able to:
 
 - View the optimal layout for the app depending on their device's screen size
