@@ -2,7 +2,6 @@ import { IBoard, IColumn, ISubTask, ITask } from "types";
 import { FiMoreVertical } from "react-icons/fi";
 import SelectBox from "../SelectBox";
 import { Dispatch, SetStateAction, useState } from "react";
-
 import Popup from "components/Popup";
 import DeleteItem from "components/DeleteItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +13,7 @@ type Props = {
   filtered: ISubTask[];
   index: number;
   handleClose: () => void;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
+  handleOpenModal: () => void;
 };
 
 export default function TaskDetails({
@@ -22,7 +21,7 @@ export default function TaskDetails({
   tasks,
   filtered,
   handleClose,
-  setOpenModal,
+  handleOpenModal,
 }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
@@ -39,11 +38,10 @@ export default function TaskDetails({
   );
   const [isOpenMenu, setOpenMenu] = useState(false);
   const [isDeleteTask, setDeleteTask] = useState(false);
-
   const [checkedState, setCheckedState] = useState(
     subtasks.map((o) => o.isCompleted === true)
   );
-
+  const handleOpenMenu = ()=> setOpenMenu(false)
   const handleOnChange = (id: number) => {
     if (id >= 0) {
       const updatedCheckedState = checkedState.map((item, index) =>
@@ -56,7 +54,7 @@ export default function TaskDetails({
   };
 
   const editTaskHandler = () => {
-    setOpenModal(true);
+    handleOpenModal();
     handleClose();
   };
 
@@ -87,7 +85,7 @@ export default function TaskDetails({
                       },
                     },
                   ]}
-                  setOpenMenu={setOpenMenu}
+                  handleOpenMenu={handleOpenMenu}
                 />
               )}
             </div>

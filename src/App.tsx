@@ -30,7 +30,7 @@ function App() {
         <Header />
         <div className="w-full h-screen">
           <div className={`absolute top-[75px] overflow-auto w-full`}>
-            <div className={` h-[87vh]`}>
+            <div className={`h-[87vh]`}>
               {isMobile && (
                 <Collapse in={show} animateOpacity>
                   <div
@@ -48,7 +48,7 @@ function App() {
                   marginLeft:
                     show && isMobile ? "clamp(300px, 10vw, 500px)" : "0px",
                 }}
-                className={`z-0 h-auto py-4 mb-8 pr-8  ${
+                className={`z-0 h-auto py-4 mb-8 pr-8 ${
                   isMobile ? "pl-8" : "pl-8"
                 }`}
               >
@@ -78,4 +78,4 @@ function App() {
 export default App;
 
 // todo
-// Add animation
+// Add eslint formatter

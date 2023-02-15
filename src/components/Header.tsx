@@ -28,11 +28,13 @@ export default function Header() {
   const editBoard = () => {
     setOpenBoard(true);
     setOpenMenu(false);
+
   };
+  const handleOpenMenu = ()=> setOpenMenu(false)
   const isMobile = useMediaQuery({ query: "(min-width: 700px)" });
   return (
     <>
-      <div className=" bg-white dark:bg-secondary flex items-center fixed w-full border-b-[1px] border-gray/20">
+      <div className="bg-white dark:bg-secondary flex items-center fixed w-full border-b-[1px] border-gray/20">
         {isMobile ? (
           <div
             className={`border-r-[1px] border-gray/20 p-6 min-w-[18rem] cursor-pointer`}
@@ -114,7 +116,7 @@ export default function Header() {
       </Modal>
       {isOpenMenu && (
         <Popup
-          setOpenMenu={setOpenMenu}
+          handleOpenMenu={handleOpenMenu}
           items={[
             {
               title: "Edit board",
@@ -123,7 +125,7 @@ export default function Header() {
             {
               title: "Delete Board",
               handler: () => {
-                setDeleteBoard(true), setOpenMenu(false);
+                setDeleteBoard(true), handleOpenMenu();
               },
             },
           ]}

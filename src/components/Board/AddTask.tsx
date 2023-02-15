@@ -45,7 +45,6 @@ export default function AddTask({ handleClose, tasks }: Props) {
   });
 
   const addTaskHandler = (values: ITask) => {
-
     values.status = selectedStatus;
 
     const foundDuplicate = checkDuplicatesTask(values, active);
@@ -142,7 +141,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                           />
                         ))}
                       <button
-                       aria-label="Add Subtasks"
+                        aria-label="Add Subtasks"
                         className="bg-white mt-2 font-bold text-sm text-primary p-2 w-full rounded-full"
                         type="button"
                         onClick={() => {
@@ -178,7 +177,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
               </div>
 
               <button
-               aria-label="Create Task"
+                aria-label="Create Task"
                 className="bg-primary p-2 w-full text-sm rounded-full"
                 type="submit"
               >

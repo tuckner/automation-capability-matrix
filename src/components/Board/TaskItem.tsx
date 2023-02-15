@@ -15,19 +15,17 @@ export default function TaskItem({ tasks, filtered, index }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setOpenModal] = useState(false);
 
+  const handleOpenModal = () => setOpenModal(true);
   return (
     <>
-      <Draggable 
-       key={tasks.id} draggableId={tasks.id.toString()} index={index}>
-
+      <Draggable key={tasks.id} draggableId={tasks.id.toString()} index={index}>
         {(provided, snapshot) => {
           return (
             <div
-           
-            ref={provided.innerRef}
-            data-snapshot={snapshot}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
+              ref={provided.innerRef}
+              data-snapshot={snapshot}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
               data-id={index}
               onClick={() => {
                 setIsOpen(true);
@@ -52,7 +50,7 @@ export default function TaskItem({ tasks, filtered, index }: Props) {
             tasks={tasks}
             handleClose={() => setIsOpen(false)}
             index={index}
-            setOpenModal={setOpenModal}
+            handleOpenModal={handleOpenModal}
           />
         }
         open={isOpen}

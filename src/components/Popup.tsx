@@ -5,16 +5,16 @@ type Props = {
     title: string;
     handler: () => void;
   }[];
-  setOpenMenu: Dispatch<SetStateAction<boolean>>;
+  handleOpenMenu: ()=>void;
 };
 
-function Popup({ items, setOpenMenu }: Props) {
+function Popup({ items, handleOpenMenu }: Props) {
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClick = (e: any) => {
       if (domRef.current && !domRef.current.contains(e.target)) {
-        setOpenMenu(false);
+        handleOpenMenu();
       }
     };
     document.addEventListener("click", handleClick, true);

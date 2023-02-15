@@ -20,7 +20,7 @@ export default function index() {
   const [isOpenBoard, setOpenBoard] = useState(false);
   const [isEditBoard, setEditBoard] = useState(false);
 
-  console.log(active);
+
   const onDragEnd = (result: any) => {
     if (!result.destination) {
       return;
@@ -105,10 +105,10 @@ export default function index() {
               );
             })}
 
-            <div className="mt-8 h-screen w-[250px] shrink-0 ">
+            <div className="mt-8 h-screen w-[250px] shrink-0">
               <div
                 onClick={() => setEditBoard(true)}
-                className=" h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
+                className="h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
               >
                 <p className="text-xl text-gray font-bold"> + New Column</p>
               </div>
