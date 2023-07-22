@@ -10,7 +10,7 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { appData, activeItem } from "redux/boardSlice";
 
-type Props = {
+interface Props {
   setShow?: Dispatch<SetStateAction<boolean>>;
   handleClose?: () => void;
 };

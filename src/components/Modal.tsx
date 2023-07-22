@@ -1,5 +1,5 @@
 import { useMediaQuery } from "react-responsive";
-type Props = {
+interface Props {
   open: boolean;
   handleClose: () => void;
   children: JSX.Element;

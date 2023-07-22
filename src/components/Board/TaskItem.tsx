@@ -5,7 +5,7 @@ import AddTask from "./AddTask";
 import TaskDetails from "./TaskDetails";
 import { Draggable } from "@hello-pangea/dnd";
 
-type Props = {
+interface Props {
   tasks: ITask;
   filtered: ISubTask[];
   index: number;

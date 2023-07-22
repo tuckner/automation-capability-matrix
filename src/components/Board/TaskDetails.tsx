@@ -7,7 +7,7 @@ import DeleteItem from "components/DeleteItem";
 import { useDispatch, useSelector } from "react-redux";
 import { appData, isCompletedToggle } from "redux/boardSlice";
 
-type Props = {
+interface Props {
   subtasks: ISubTask[];
   tasks: ITask;
   filtered: ISubTask[];

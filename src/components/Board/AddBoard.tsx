@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkDuplicatesBoard } from "utilis";
 import { useToast } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
-type Props = {
+interface Props {
   active?: IBoard;
   handleClose: () => void;
 };

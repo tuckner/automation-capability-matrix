@@ -77,5 +77,3 @@ function App() {
 
 export default App;
 
-// todo
-// Add eslint formatter

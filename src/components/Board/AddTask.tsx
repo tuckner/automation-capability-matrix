@@ -9,7 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkDuplicatesTask } from "utilis";
 import { useToast } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
-type Props = {
+
+interface Props {
   handleClose: () => void;
   tasks?: ITask;
   index?: number;

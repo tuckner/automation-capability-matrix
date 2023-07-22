@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { appData, deleteBoard, deleteTask } from "redux/boardSlice";
 import { ITask } from "types";
-type Props = {
+interface Props {
   handleClose: () => void;
   isDeleteBoard?: boolean;
   tasks?: ITask;
