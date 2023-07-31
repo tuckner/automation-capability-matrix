@@ -1,5 +1,7 @@
-# Kanban-Task-Management-Application
-A task management board application for creating, reading, updating, and deleting boards and tasks; built with Vite React, TailwindCSS, Redux Toolkit and Typescript.
+# Kanban-Board
+The Kanban App is a project management application similar to Trello and Asana. The project are created as boards , each board shows progress of the project. The board includes task and subtask exisitng for the project. The Application is built with Vite React, TailwindCSS, Redux Toolkit and Typescript.
+
+![image](https://github.com/sandygudie/Kanban-App/assets/54219127/3edd0818-9867-4573-893d-1aaf0e561097)
 
 ## Overview
 
