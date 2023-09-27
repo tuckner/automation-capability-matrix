@@ -1,7 +1,7 @@
 import { IBoard, IColumn, ISubTask, ITask } from "types";
 import { FiMoreVertical } from "react-icons/fi";
 import SelectBox from "../SelectBox";
-import {  useState } from "react";
+import { useState } from "react";
 import Popup from "components/Popup";
 import DeleteItem from "components/DeleteItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +27,7 @@ export default function TaskDetails({
   const data = useSelector(appData);
   const active: IBoard = data.active;
 
-  const [selectedStatus, setStatus] = useState<string | any>(
+  const [selectedColumn, setSelectedColumn] = useState<string | any>(
     tasks
       ? active.columns.find((item: IColumn) =>
           item.tasks.find((o) => o == tasks)
@@ -41,7 +41,7 @@ export default function TaskDetails({
   const [checkedState, setCheckedState] = useState(
     subtasks.map((o) => o.isCompleted === true)
   );
-  const handleOpenMenu = ()=> setOpenMenu(false)
+  const handleOpenMenu = () => setOpenMenu(false);
   const handleOnChange = (id: number) => {
     if (id >= 0) {
       const updatedCheckedState = checkedState.map((item, index) =>
@@ -124,12 +124,12 @@ export default function TaskDetails({
               })}
             </div>
           </div>
-          <div className="mt-6 ">
-            <p className=" text-sm mb-1">Status</p>
+          <div className="mt-6">
+            <p className="text-sm mb-1">Status</p>
             <SelectBox
-              selectedStatus={selectedStatus}
+              selectedColumn={selectedColumn}
               handleClose={handleClose}
-              setStatus={setStatus}
+              setSelectedColumn={setSelectedColumn}
               tasks={tasks}
             />
           </div>

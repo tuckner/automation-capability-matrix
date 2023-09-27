@@ -31,7 +31,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
         )?.name
   );
 
-  console.log(selectedColumn);
+
   const TaskSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
     description: Yup.string(),
