@@ -22,5 +22,5 @@ jobs:
         run: |
          npm run build
       - name: Test
-      - uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
        
