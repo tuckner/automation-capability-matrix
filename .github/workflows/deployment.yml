@@ -2,31 +2,36 @@ name: Deployment
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
       - name: Install dependencies
-        run: npm install
-      - name: Check style
-        run: npm run lint
+        run: |
+         npm install
+      - name: Check formatting
+        run: |
+          npm run lint
       - name: Test
       - uses: cypress-io/github-action@v5
         with:
         command: npm run test
         start: npm run dev
         wait-on: http://localhost:5000
+
+  deploy_to_netlify:
+    runs-on: ubuntu-latest
+    steps:
       - name: "Deploy to Netlify"
       - uses: jsmrcaga/action-netlify-deploy@v2.0.0
         with:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN_SECRET }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_DEPLOY_MESSAGE: "Deployed from GitHub action"
-        NETLIFY_DEPLOY_TO_PROD: true
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN_SECRET }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_DEPLOY_MESSAGE: "Deployed from GitHub action"
+          NETLIFY_DEPLOY_TO_PROD: true
