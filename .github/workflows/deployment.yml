@@ -8,8 +8,11 @@ jobs:
   deployment_pipeline:
     runs-on: ubuntu-latest
     steps:
-      - name: Say hello
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install dependencies
         run: |
-          echo "Hello World!"
-
-  
+         npm install
+      
