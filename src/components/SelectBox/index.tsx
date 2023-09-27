@@ -6,13 +6,13 @@ import { addTask, appData, deleteTask } from "redux/boardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 interface Props {
-  selectedStatus: string;
-  setStatus: Dispatch<SetStateAction<string>>;
+  selectedColumn: string;
+  setSelectedColumn: Dispatch<SetStateAction<string>>;
   tasks?: ITask;
   handleClose?: () => void;
 }
 
-export default function index({ selectedStatus, setStatus, tasks }: Props) {
+export default function Index({ selectedColumn, setSelectedColumn, tasks }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
   const  active:IBoard  = data.active;
@@ -21,7 +21,7 @@ export default function index({ selectedStatus, setStatus, tasks }: Props) {
   const toggleDropdown = () => setOpen(!isOpen);
 
   const handleItemClick = (title: string) => {
-    setStatus(title);
+    setSelectedColumn(title);
     if (tasks?.status !== title && tasks !== undefined) {
       const updatedTasks = {
         ...tasks,
@@ -43,8 +43,8 @@ export default function index({ selectedStatus, setStatus, tasks }: Props) {
       >
         <p className="text-sm">
           {" "}
-          {selectedStatus
-            ? selectedStatus
+          {selectedColumn
+            ? selectedColumn
             : active.columns.find((item: IColumn) =>
                 item.tasks.find((o, index) => index === 0)
               )?.name}

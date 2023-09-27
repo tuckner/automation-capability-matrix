@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import {  Collapse } from "@chakra-ui/react";
 
 function App() {
-  const [show, setShow] = useState<boolean>(true);
+  const [showSidebar,setShowSidebar] = useState<boolean>(true);
 
   useEffect(() => {
     localStorage.setItem("theme", "dark");
@@ -32,13 +32,14 @@ function App() {
           <div className={`absolute top-[75px] overflow-auto w-full`}>
             <div className={`h-[87vh]`}>
               {isMobile && (
-                <Collapse in={show} animateOpacity>
+                <Collapse in={showSidebar} animateOpacity>
                   <div
                     className={`z-20 h-screen fixed w-72 ${
-                      show ? "block" : "hidden"
+                      showSidebar ? "block" : "hidden"
                     }`}
                   >
-                    <SideBar setShow={setShow} />
+                     <SideBar setShowSidebar={setShowSidebar}  />
+                 
                   </div>
                 </Collapse>
               )}
@@ -46,7 +47,7 @@ function App() {
               <div
                 style={{
                   marginLeft:
-                    show && isMobile ? "clamp(300px, 10vw, 500px)" : "0px",
+                    showSidebar && isMobile ? "clamp(300px, 10vw, 500px)" : "0px",
                 }}
                 className={`z-0 h-auto py-4 mb-8 pr-8 ${
                   isMobile ? "pl-8" : "pl-8"
@@ -61,10 +62,10 @@ function App() {
         <button
           aria-label="Visibilityoff"
           onClick={() => {
-            setShow(true);
+          setShowSidebar(true);
           }}
           className={` ${
-            show ? "hidden" : "block"
+            showSidebar ? "hidden" : "block"
           } cursor-pointer fixed bottom-10 rounded-r-full bg-primary p-4 w-12`}
         >
           {" "}

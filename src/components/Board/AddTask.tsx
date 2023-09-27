@@ -6,7 +6,7 @@ import { TextInput, TextArea, SubtaskInput } from "../InputField";
 import { IBoard, IColumn, ISubTask, ITask } from "types";
 import { appData, addTask, editTask, deleteTask } from "redux/boardSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { checkDuplicatesTask } from "utilis";
+import { checkDuplicatedTask } from "utilis";
 import { useToast } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -14,14 +14,14 @@ interface Props {
   handleClose: () => void;
   tasks?: ITask;
   index?: number;
-};
+}
 export default function AddTask({ handleClose, tasks }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
   const active: IBoard = data.active;
   const toast = useToast();
 
-  const [selectedStatus, setStatus] = useState<string | any>(
+  const [selectedColumn, setSelectedColumn] = useState<string | any>(
     tasks
       ? active.columns.find((item: IColumn) =>
           item.tasks.find((o) => o == tasks)
@@ -31,6 +31,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
         )?.name
   );
 
+  console.log(selectedColumn);
   const TaskSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
     description: Yup.string(),
@@ -46,9 +47,9 @@ export default function AddTask({ handleClose, tasks }: Props) {
   });
 
   const addTaskHandler = (values: ITask) => {
-    values.status = selectedStatus;
+    values.status = selectedColumn;
 
-    const foundDuplicate = checkDuplicatesTask(values, active);
+    const foundDuplicate = checkDuplicatedTask(values, active);
     if (foundDuplicate === false) {
       dispatch(addTask({ updatedTasks: values, position: 0 }));
     } else {
@@ -65,12 +66,12 @@ export default function AddTask({ handleClose, tasks }: Props) {
   };
 
   const editTaskHandler = (values: ITask) => {
-    if (values.status === selectedStatus) {
+    if (values.status === selectedColumn) {
       dispatch(editTask({ values, tasks }));
     } else {
       const updatedTasks = {
         ...values,
-        status: selectedStatus,
+        status: selectedColumn,
       };
       dispatch(addTask({ updatedTasks, position: 0 }));
       dispatch(deleteTask(tasks));
@@ -96,7 +97,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                   id: uuidv4(),
                   title: "",
                   description: "",
-                  status: selectedStatus,
+                  status: selectedColumn,
                   subtasks: [],
                 }
           }
@@ -172,8 +173,8 @@ export default function AddTask({ handleClose, tasks }: Props) {
 
               <div className="mb-6">
                 <SelectBox
-                  selectedStatus={selectedStatus}
-                  setStatus={setStatus}
+                  selectedColumn={selectedColumn}
+                  setSelectedColumn={setSelectedColumn}
                 />
               </div>
 

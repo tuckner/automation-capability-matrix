@@ -12,7 +12,7 @@ import { randomColor } from "utilis";
 
 import { v4 as uuidv4 } from "uuid";
 
-export default function index() {
+export default function Index() {
   const data = useSelector(appData);
   const dispatch = useDispatch();
   const active: IBoard = data.active;
@@ -30,7 +30,7 @@ export default function index() {
     const sourceList = activeCopy.columns.find(
       (item: IColumn) => item.name === result.source.droppableId
     );
-    let sourceTask = sourceList?.tasks.find(
+    const sourceTask = sourceList?.tasks.find(
       (item: ITask, index: number) => index === result.source.index
     );
 

@@ -6,7 +6,7 @@ interface Props {
   isDeleteBoard?: boolean;
   tasks?: ITask;
   name: string;
-};
+}
 
 export default function Delete({
   handleClose,

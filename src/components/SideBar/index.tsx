@@ -11,11 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { appData, activeItem } from "redux/boardSlice";
 
 interface Props {
-  setShow?: Dispatch<SetStateAction<boolean>>;
+setShowSidebar?: Dispatch<SetStateAction<boolean>>;
   handleClose?: () => void;
-};
+}
 
-export default function index({ setShow, handleClose }: Props) {
+export default function Index({setShowSidebar, handleClose }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
   const data = useSelector(appData);
@@ -86,7 +86,7 @@ export default function index({ setShow, handleClose }: Props) {
             <button
               aria-label="Hide Sidebar"
               onClick={() => {
-                setShow ? setShow(false) : null;
+          setShowSidebar ?setShowSidebar(false) : null;
               }}
               className="cursor-pointer border-none inline-flex items-center gap-x-2 text-xs my-4"
             >

@@ -4,13 +4,13 @@ import { SubtaskInput, TextInput } from "components/InputField";
 import { IBoard, IColumn } from "types";
 import { editBoard, appData, addBoard } from "redux/boardSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { checkDuplicatesBoard } from "utilis";
+import { checkDuplicatedBoard } from "utilis";
 import { useToast } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 interface Props {
   active?: IBoard;
   handleClose: () => void;
-};
+}
 function AddBoard({ handleClose, active }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
@@ -29,7 +29,7 @@ function AddBoard({ handleClose, active }: Props) {
       .min(1, "Add an item."),
   });
   const addBoardHandler = (values: IBoard) => {
-    const foundDuplicate = checkDuplicatesBoard(values, board);
+    const foundDuplicate = checkDuplicatedBoard(values, board);
     if (foundDuplicate === false) {
       dispatch(addBoard(values));
     } else {

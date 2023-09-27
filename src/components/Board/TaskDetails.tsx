@@ -1,7 +1,7 @@
 import { IBoard, IColumn, ISubTask, ITask } from "types";
 import { FiMoreVertical } from "react-icons/fi";
 import SelectBox from "../SelectBox";
-import { Dispatch, SetStateAction, useState } from "react";
+import {  useState } from "react";
 import Popup from "components/Popup";
 import DeleteItem from "components/DeleteItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ interface Props {
   index: number;
   handleClose: () => void;
   handleOpenModal: () => void;
-};
+}
 
 export default function TaskDetails({
   subtasks,

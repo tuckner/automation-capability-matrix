@@ -3,8 +3,8 @@ interface Props {
   open: boolean;
   handleClose: () => void;
   children: JSX.Element;
-  showDowndrop?: Boolean;
-};
+  showDowndrop?: boolean;
+}
 
 export default function Modal({
   children,

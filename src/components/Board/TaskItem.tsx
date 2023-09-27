@@ -9,7 +9,7 @@ interface Props {
   tasks: ITask;
   filtered: ISubTask[];
   index: number;
-};
+}
 
 export default function TaskItem({ tasks, filtered, index }: Props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,21 +42,16 @@ export default function TaskItem({ tasks, filtered, index }: Props) {
           );
         }}
       </Draggable>
-      <Modal
-        children={
-          <TaskDetails
-            filtered={filtered}
-            subtasks={tasks.subtasks}
-            tasks={tasks}
-            handleClose={() => setIsOpen(false)}
-            index={index}
-            handleOpenModal={handleOpenModal}
-          />
-        }
-        open={isOpen}
-        handleClose={() => setIsOpen(false)}
-      />
-
+      <Modal open={isOpen} handleClose={() => setIsOpen(false)}>
+        <TaskDetails
+          filtered={filtered}
+          subtasks={tasks.subtasks}
+          tasks={tasks}
+          handleClose={() => setIsOpen(false)}
+          index={index}
+          handleOpenModal={handleOpenModal}
+        />
+      </Modal>
       <Modal open={isOpenModal} handleClose={() => setOpenModal(false)}>
         <AddTask
           tasks={tasks}

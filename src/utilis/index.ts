@@ -21,14 +21,16 @@ export const saveState = (state: any) => {
   try {
     const serializesState = JSON.stringify(state);
     localStorage.setItem("boarddata", serializesState);
-  } catch (err) {}
+  } catch (err) {
+    return err
+  }
 };
 
-export const checkDuplicatesBoard = (values: IBoard, board: IBoard[]) => {
+export const  checkDuplicatedBoard = (values: IBoard, board: IBoard[]) => {
   return board.some((el: IBoard) => el.name === values.name);
 };
 
-export const checkDuplicatesTask = (values: ITask, active: IBoard) => {
+export const checkDuplicatedTask = (values: ITask, active: IBoard) => {
   let foundTask;
 
   active.columns.find((item) =>

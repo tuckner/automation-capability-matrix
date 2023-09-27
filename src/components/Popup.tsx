@@ -6,7 +6,7 @@ interface Props {
     handler: () => void;
   }[];
   handleOpenMenu: ()=>void;
-};
+}
 
 function Popup({ items, handleOpenMenu }: Props) {
   const domRef = useRef<HTMLDivElement>(null);
@@ -19,7 +19,7 @@ function Popup({ items, handleOpenMenu }: Props) {
     };
     document.addEventListener("click", handleClick, true);
     return () => document.removeEventListener("click", handleClick, true);
-  }, []);
+  }, [handleOpenMenu]);
 
   return (
     <div
