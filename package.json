@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.1",
@@ -13,14 +14,11 @@
     "@emotion/styled": "^11.10.5",
     "@hello-pangea/dnd": "^16.0.1",
     "@reduxjs/toolkit": "^1.9.0",
-    "@types/react-beautiful-dnd": "^13.1.2",
     "formik": "^2.2.9",
     "framer-motion": "^7.6.7",
     "react": "^18.2.0",
-    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
-    "react-indiana-drag-scroll": "^3.0.1-alpha",
     "react-redux": "^8.0.5",
     "react-responsive": "^9.0.0",
     "react-router-dom": "6",
@@ -32,6 +30,7 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.12",
+    "cypress": "^13.2.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.6.4",
