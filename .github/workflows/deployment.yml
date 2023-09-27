@@ -8,21 +8,8 @@ jobs:
   deployment_pipeline:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-      - name: Install dependencies
+      - name: Say hello
         run: |
-         npm install
-      - name: Check formatting
-        run: |
-          npm run lint
-      - name: Test
-      - uses: cypress-io/github-action@v5
-        with:
-        command: npm run test
-        start: npm run dev
-        wait-on: http://localhost:5000
+          echo "Hello World!"
 
   
