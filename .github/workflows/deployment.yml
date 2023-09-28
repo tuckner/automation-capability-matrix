@@ -27,7 +27,7 @@ jobs:
         with:
           start: npm run dev
       - name: "Deploy to Netlify"
-      - uses: jsmrcaga/action-netlify-deploy@v2.0.0
+        uses: jsmrcaga/action-netlify-deploy@v2.0.0
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN_SECRET }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
