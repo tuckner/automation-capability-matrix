@@ -22,9 +22,7 @@ jobs:
         run: |
          npm run build
       - name: Test
-        uses: cypress-io/github-action@v6
-        with:
-         command: npm run test:e2e
-         start: npm run dev
-         wait-on: 'http://127.0.0.1:5173/'
+        run: |
+         npm run dev
+         npm run test
        
