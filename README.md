@@ -18,7 +18,7 @@ yarn install
 ```
 yarn run dev
 ```
-4. Start the application by running the start script.
+4. Run test.
 ```
 yarn run test
 ```
