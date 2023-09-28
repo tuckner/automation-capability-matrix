@@ -24,7 +24,7 @@ jobs:
       - name: Test
         uses: cypress-io/github-action@v6
         with:
-         command: npm run test
+         command: npm run test:e2e
          start: npm run dev
          wait-on: 'http://127.0.0.1:5173/'
        
