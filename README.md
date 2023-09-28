@@ -18,6 +18,10 @@ yarn install
 ```
 yarn run dev
 ```
+4. Run test.
+```
+yarn run test
+```
 
 ## Features
 users are able to:
@@ -40,7 +44,11 @@ users are able to:
 * Formik
 * Yup
 * Chakara-UI
+* Cypress
+* Eslint
 
+## Deployment pipeline(CI/CD)
+ - From GitHub Actions to Netlify
 
 
 #### This app is a challenge on [Frontendmentor.io](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB).
