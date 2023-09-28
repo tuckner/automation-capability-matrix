@@ -27,9 +27,12 @@ jobs:
         with:
           start: npm run dev
       - name: "Deploy to Netlify"
-        uses: jsmrcaga/action-netlify-deploy@v2.0.0
+        uses: nwtgck/actions-netlify@v2.0
         with:
+          publish-dir: "./dist"
+          production-branch: main
+          production-deploy: true
+          deploy-message: "Deploy from GitHub Actions"
+        env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN_SECRET }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_DEPLOY_MESSAGE: "Deployed from GitHub action"
-          NETLIFY_DEPLOY_TO_PROD: true
