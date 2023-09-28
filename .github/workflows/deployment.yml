@@ -9,21 +9,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          node-version: "16"
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
-         npm install
-      - name: Check formatting
+          npm install
+      - name: Lint
         run: |
-         npm run lint
+          npm run lint
       - name: Build App
         run: |
-         npm run build
+          npm run build
       - name: Test
         uses: cypress-io/github-action@v6
         with:
-         start: npm run dev
-        
-       
+          start: npm run dev
+
+deploy_to_netlify:
+  runs-on: ubuntu-latest
+  steps:
+    - name: "Deploy to Netlify"
+    - uses: jsmrcaga/action-netlify-deploy@v2.0.0
+      with:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN_SECRET }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_DEPLOY_MESSAGE: "Deployed from GitHub action"
+        NETLIFY_DEPLOY_TO_PROD: true
