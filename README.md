@@ -26,7 +26,7 @@ yarn run test
 
 ## Set up with docker image
 ```
-docker pull sandy8169/kanban
+docker pull sandy8169/kanban:latest
 ```
 
 ## Features
