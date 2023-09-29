@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  deployment_pipeline:
+  build_app:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,6 +25,11 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm run dev
+
+  deploy_to_netlify:
+    runs-on: ubuntu-latest
+    needs: [build_app]
+    steps:
       - name: "Deploy to Netlify"
         uses: nwtgck/actions-netlify@v2.0
         with:
