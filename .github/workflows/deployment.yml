@@ -59,6 +59,7 @@ jobs:
       - name: "Deploy to Netlify"
         uses: nwtgck/actions-netlify@v2.0
         with:
+          publish-dir: "./dist"
           production-branch: main
           production-deploy: true
           deploy-message: "Deploy from GitHub Actions"
