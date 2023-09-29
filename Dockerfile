@@ -4,5 +4,6 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm ci --only=production
+RUN rm -rf node_modules && yarn install --frozen-lockfile
 CMD npm run dev
+
