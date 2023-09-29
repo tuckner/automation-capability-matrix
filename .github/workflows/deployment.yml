@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  build_app:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,10 +25,20 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm run dev
+      - name: "Deploy to Netlify"
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: "./dist"
+          production-branch: main
+          production-deploy: true
+          deploy-message: "Deploy from GitHub Actions"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN_SECRET }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
   build_and_push_Docker_images:
     runs-on: ubuntu-latest
-    needs: [build_app]
+    needs: [build]
     steps:
       - name: "Set up QEMU"
         uses: docker/setup-qemu-action@v3
@@ -51,20 +61,3 @@ jobs:
           image: ${{ secrets.DOCKERHUB_USERNAME }}/kanban:latest
           run: |
             echo "Running the docker image"
-
-  deploy_to_netlify:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build App
-        run: |
-          npm run build
-      - name: "Deploy to Netlify"
-        uses: nwtgck/actions-netlify@v2.0
-        with:
-          publish-dir: "./dist"
-          production-branch: main
-          production-deploy: true
-          deploy-message: "Deploy from GitHub Actions"
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN_SECRET }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
