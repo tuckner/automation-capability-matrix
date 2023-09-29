@@ -23,6 +23,12 @@ yarn run dev
 yarn run test
 ```
 
+
+## Set up with docker image
+```
+docker pull sandy8169/kanban
+```
+
 ## Features
 users are able to:
 
