@@ -61,7 +61,7 @@ export default function Index() {
                       style={{
                         fill:
                           index === 0
-                            ? "hsla(193, 75%, 59%,1)"
+                            ? "hsla(40, 75%, 59%,1)"
                             : index === 1
                             ? "hsla(249, 83% ,70%, 1)"
                             : "hsla(" + 50 * index + ", 83% ,70%, 1)",
