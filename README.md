@@ -2,7 +2,21 @@
 
 The Automation Capability Matrix is a framework for analyzing automated workflows an organization has implemented.
 
-## Overview
+## Features
+- Add new capabilities with descriptions
+- Light/dark mode
+- Track workflows that align with capabilities
+- Local browser storage of configuration
+- Export of configuration
+
+## Future improvements
+
+- Custom boards
+- Configuration import
+- Export to more file formats
+- More matrices 
+
+## Run
 
 ### Installation
 1. Clone this repository into your local machine:
