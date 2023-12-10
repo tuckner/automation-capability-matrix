@@ -2,9 +2,11 @@
   "name": "automation-capability-matrix",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://tuckner.github.io/automation-capability-matrix",
+  "homepage": "https://tuckner.github.io/automation-capability-matrix/",
   "scripts": {
     "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "cypress open",
