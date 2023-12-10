@@ -32,7 +32,10 @@ export const exportConfig = () => {
   try {
     const boardData = localStorage.getItem("boarddata");
     if (boardData) {
-      const blob = new Blob([JSON.stringify([JSON.parse(boardData).board], null, 2)], { type: "application/json" });
+      const raw = JSON.parse(boardData).board
+      const config = {"schema": 1, "config": raw}
+      const acmexport = JSON.stringify(config, null, 2)
+      const blob = new Blob([acmexport], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
