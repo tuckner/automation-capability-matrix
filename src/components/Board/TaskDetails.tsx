@@ -66,7 +66,7 @@ export default function TaskDetails({
               <p>
                 <FiMoreVertical
                   onClick={() => setOpenMenu(!isOpenMenu)}
-                  className="text-3xl cursor-pointer"
+                  className="text-1xl cursor-pointer"
                 />
               </p>
               {isOpenMenu && (
