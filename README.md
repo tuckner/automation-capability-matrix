@@ -24,4 +24,5 @@ yarn run test
 
 #### Credit
 
-- [Dodoburner](https://github.com/dodoburner/kanban-task-management-web-app)
+- [dodoburner](https://github.com/dodoburner/kanban-task-management-web-app)
+- [sandygudie](https://github.com/sandygudie/Kanban-App)
