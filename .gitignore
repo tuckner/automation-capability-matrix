@@ -24,6 +24,3 @@ build
 *.sw?
 
 todo
-Dockerfile
-docker-compose.yml
-.dockerignore

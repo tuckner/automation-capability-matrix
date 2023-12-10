@@ -74,6 +74,19 @@ export default function Index({setShowSidebar, handleClose }: Props) {
         </div>
 
         <div className="mx-auto w-4/5 mb-4">
+        <div>
+          {isMobile && (
+            <button
+              aria-label="GitHub"
+              onClick={() => {
+                window.open("https://github.com/tuckner/automation-capability-matrix", "_blank");
+              }} 
+              className="cursor-pointer border-none inline-flex items-center gap-x-2 text-xs my-4"
+            >
+            View GitHub
+            </button>
+          )}
+          </div>
           <div
             className="flex items-center text-xs gap-x-6 p-2 bg-secondary-dark 
       justify-center rounded-md"
