@@ -2,6 +2,7 @@
   "name": "automation-capability-matrix",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://tuckner.github.io/automation-capability-matrix/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
