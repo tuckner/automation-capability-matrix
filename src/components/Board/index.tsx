@@ -8,7 +8,7 @@ import AddTask from "./AddTask";
 import TaskItem from "./TaskItem";
 import { addTask, appData, deleteTask } from "redux/boardSlice";
 import { Droppable, DragDropContext } from "@hello-pangea/dnd";
-import { randomColor } from "utilis";
+// import { randomColor } from "utilis";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -64,7 +64,7 @@ export default function Index() {
                             ? "hsla(193, 75%, 59%,1)"
                             : index === 1
                             ? "hsla(249, 83% ,70%, 1)"
-                            : randomColor(),
+                            : "hsla(" + 50 * index + ", 83% ,70%, 1)",
                       }}
                     />
                     {item.name} ({item.tasks.length})

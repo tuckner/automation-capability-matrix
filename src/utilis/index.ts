@@ -8,8 +8,8 @@ export const loadState = () => {
     active: data.find((item: IBoard, index: number) => index === 0),
   };
   try {
-    // const serializedState = localStorage.getItem("boarddata");
-    const serializedState = null;
+    const serializedState = localStorage.getItem("boarddata");
+    // const serializedState = null;
     if (serializedState === null) {
       return initialState;
     }

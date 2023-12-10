@@ -6,6 +6,9 @@ import eslint from 'vite-plugin-eslint'
 export default defineConfig(() => {
   const config = {
     base: `/automation-capability-matrix/`,
+    server: {
+      port: 3000,
+    },
     plugins: [
       tsconfigPaths(),
       react(),
