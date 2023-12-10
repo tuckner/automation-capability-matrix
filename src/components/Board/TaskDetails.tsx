@@ -89,8 +89,14 @@ export default function TaskDetails({
             </div>
           </div>
           <div>
-            <p className="text-sm text-gray my-6">
+            <p className="text-sm text-gray my-4">
               {tasks.description ? tasks.description : "No description"}
+            </p>
+            Techniques:
+            <p className="text-sm text-gray my-3">
+              {tasks.techniques && tasks.techniques.map((technique: string, index: number) => (
+                <li key={index}>{technique}</li>
+              ))}
             </p>
             <p className=" text-sm font-bold mb-2 ">{`Workflows: ${tasks.subtasks.length}`}</p>
             <div
