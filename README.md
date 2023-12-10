@@ -1,5 +1,6 @@
 # Automation Capability Matrix
-The Automation Capability Matrix is a framework for analyzing automated workflows an organization has implemented. 
+
+The Automation Capability Matrix is a framework for analyzing automated workflows an organization has implemented.
 
 ## Overview
 
@@ -23,4 +24,4 @@ yarn run test
 
 #### Credit
 
-- (Dodoburner)[https://github.com/dodoburner/kanban-task-management-web-app]
+- [Dodoburner](https://github.com/dodoburner/kanban-task-management-web-app)
