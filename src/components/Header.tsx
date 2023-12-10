@@ -141,12 +141,12 @@ export default function Header() {
               title: "Edit board",
               handler: editBoard,
             },
-            {
-              title: "Delete board",
-              handler: () => {
-                setDeleteBoard(true), handleOpenMenu();
-              },
-            },
+            // {
+            //   title: "Delete board",
+            //   handler: () => {
+            //     setDeleteBoard(true), handleOpenMenu();
+            //   },
+            // },
             {
               title: "Reset board",
               handler: resetBoard,
