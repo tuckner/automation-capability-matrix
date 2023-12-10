@@ -3,10 +3,10 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
 import AddBoard from "./Board/AddBoard";
 import { useMediaQuery } from "react-responsive";
-import logoMobile from "../assets/logo-mobile.svg";
+// import logoMobile from "../assets/logo-mobile.svg";
 import AddTask from "./Board/AddTask";
 import DeleteItem from "./DeleteItem";
-import Icon from "./Icon";
+// import Icon from "./Icon";
 import Modal from "./Modal";
 import Popup from "./Popup";
 import { FiChevronDown } from "react-icons/fi";
@@ -14,6 +14,7 @@ import SideBar from "./SideBar";
 import { useSelector } from "react-redux";
 import { appData } from "redux/boardSlice";
 import { IBoard } from "types";
+import { exportConfig, resetBoard } from "utilis";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,10 +35,10 @@ export default function Header() {
   const isMobile = useMediaQuery({ query: "(min-width: 700px)" });
   return (
     <>
-      <div className="bg-white dark:bg-secondary flex items-center fixed w-full border-b-[1px] border-gray/20">
-        {isMobile ? (
+      <div className="bg-white dark:bg-secondary flex items-center h-20 fixed w-full border-b-[1px] border-gray/20">
+        {/* {isMobile ? (
           <div
-            className={`border-r-[1px] border-gray/20 p-6 min-w-[18rem] cursor-pointer`}
+            className={`border-r-[1px] border-gray/20 p-6 min-w-[13rem] cursor-pointer`}
           >
             <Icon type="kanban_logo" />
           </div>
@@ -45,7 +46,7 @@ export default function Header() {
           <div className="border-gray/20 p-6 cursor-pointer">
             <img src={logoMobile} alt="logo" className="w-10 h-10" />
           </div>
-        )}
+        )} */}
         <div
           className={`flex items-center justify-between w-full ${
             isMobile ? "px-4" : "pr-4"
@@ -70,7 +71,7 @@ export default function Header() {
               )}
               <div className="flex items-center">
                 <button
-                  aria-label="Add Task"
+                  aria-label="Add capability"
                   onClick={() => setIsOpen(true)}
                   className={`rounded-full bg-primary text-sm font-bold text-white ${
                     !isMobile ? "w-[40px]" : "w-32"
@@ -79,9 +80,27 @@ export default function Header() {
                   {!isMobile ? (
                     <IoIosAdd className="inline-flex" />
                   ) : (
-                    <span className="py-8"> + Add Task</span>
+                    <span className="py-8"> + Add capability</span>
                   )}
                 </button>
+                <div className="pr-4">
+                </div>
+                <div className="pr-4">
+                <button
+                  aria-label="Export"
+                  onClick={() => exportConfig()}
+                  className={`rounded-full bg-primary text-sm font-bold text-white ${
+                    !isMobile ? "w-[40px]" : "w-32"
+                  } h-[40px]`}
+                >
+                  {!isMobile ? (
+                    <IoIosAdd className="inline-flex" />
+                  ) : (
+                    <span className="py-8">Export</span>
+                  )}
+                </button>
+              
+                </div>
                 <div>
                   <BiDotsVerticalRounded
                     onClick={() => setOpenMenu(!isOpenMenu)}
@@ -123,10 +142,14 @@ export default function Header() {
               handler: editBoard,
             },
             {
-              title: "Delete Board",
+              title: "Delete board",
               handler: () => {
                 setDeleteBoard(true), handleOpenMenu();
               },
+            },
+            {
+              title: "Reset board",
+              handler: resetBoard,
             },
           ]}
         />

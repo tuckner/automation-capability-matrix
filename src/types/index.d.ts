@@ -6,9 +6,10 @@ export interface IBoard {
     name: string;
     tasks: {
       id:string,
-      title: string;
+      name: string;
       description: string;
-      status: string;
+      category: string;
+      techniques: string[];
       subtasks: {  id:string,
         title: string;
         isCompleted: boolean;
@@ -22,9 +23,10 @@ export interface IColumn {
   id:string,
   tasks: {
     id:string,
-    title: string;
+    name: string;
     description: string;
-    status: string;
+    category: string;
+    techniques: string[];
     subtasks: {
       id:string,
       title: string;
@@ -35,9 +37,10 @@ export interface IColumn {
 
 export interface ITask {
   id:string,
-  title: string;
+  name: string;
   description: string;
-  status: string;
+  category: string;
+  techniques: string[];
   subtasks: {
     id:string,
     title: string;

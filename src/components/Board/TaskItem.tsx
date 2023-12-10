@@ -1,17 +1,18 @@
 import Modal from "components/Modal";
 import { useState } from "react";
-import { ISubTask, ITask } from "types";
+import { ITask } from "types";
 import AddTask from "./AddTask";
 import TaskDetails from "./TaskDetails";
 import { Draggable } from "@hello-pangea/dnd";
+import { BsCircleFill } from "react-icons/bs";
+// import { randomColor } from "utilis";
 
 interface Props {
   tasks: ITask;
-  filtered: ISubTask[];
   index: number;
 }
 
-export default function TaskItem({ tasks, filtered, index }: Props) {
+export default function TaskItem({ tasks, index }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setOpenModal] = useState(false);
 
@@ -33,19 +34,31 @@ export default function TaskItem({ tasks, filtered, index }: Props) {
               className="hover:opacity-60 shadow-lg  
               cursor-pointer bg-white dark:bg-secondary mb-4 rounded-lg py-6 px-4"
             >
-              <p className="font-bold text-sm">{tasks.title} </p>
+              <p className="font-bold text-sm">{tasks.name} </p>
               <p className="pt-2 text-xs text-gray font-bold">
                 {" "}
-                {filtered.length} of {tasks.subtasks.length} substasks
+                {tasks.subtasks.length} workflows
               </p>
-            </div>
-          );
-        }}
-      </Draggable>
-      <Modal open={isOpen} handleClose={() => setIsOpen(false)}>
-        <TaskDetails
-          filtered={filtered}
-          subtasks={tasks.subtasks}
+              <div className="pt-2 text-xs text-gray content-end font-bold">
+                          {" "}
+                          <div className="flex justify-end">
+                            <BsCircleFill
+                              className=""
+                              onClick={handleOpenModal}
+                              style={{
+                                color: tasks.subtasks.length === 1 ? "#e6e22e" : tasks.subtasks.length === 2 ? "#8fb935" : "#e64747"
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }}
+                </Draggable>
+                {/* <Icon type="board" /> */}
+                <Modal open={isOpen} handleClose={() => setIsOpen(false)}>
+                  <TaskDetails
+                    subtasks={tasks.subtasks}
           tasks={tasks}
           handleClose={() => setIsOpen(false)}
           index={index}

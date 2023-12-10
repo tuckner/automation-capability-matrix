@@ -79,13 +79,12 @@ export default function Index() {
                         {item.tasks.length > 0 ? (
                           <div>
                             {item.tasks.map((tasks: ITask, index: number) => {
-                              const filtered = tasks.subtasks.filter(
-                                (item) => item.isCompleted === true
-                              );
+                              // const filtered = tasks.subtasks.filter(
+                              //   (item) => item.isCompleted === true
+                              // );
                               return (
                                 <TaskItem
                                   tasks={tasks}
-                                  filtered={filtered}
                                   key={tasks.id}
                                   index={index}
                                 />

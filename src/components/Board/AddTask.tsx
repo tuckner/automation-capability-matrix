@@ -33,21 +33,20 @@ export default function AddTask({ handleClose, tasks }: Props) {
 
 
   const TaskSchema = Yup.object().shape({
-    title: Yup.string().required("Required"),
+    name: Yup.string().required("Required"),
     description: Yup.string(),
-    status: Yup.string(),
+    category: Yup.string().required("Required"),
     subtasks: Yup.array()
       .of(
         Yup.object().shape({
-          title: Yup.string().required("Required"),
+          title: Yup.string(),
           isCompleted: Yup.boolean(),
         })
-      )
-      .min(1, "Add an item."),
+      ),
   });
 
   const addTaskHandler = (values: ITask) => {
-    values.status = selectedColumn;
+    values.category = selectedColumn;
 
     const foundDuplicate = checkDuplicatedTask(values, active);
     if (foundDuplicate === false) {
@@ -66,12 +65,12 @@ export default function AddTask({ handleClose, tasks }: Props) {
   };
 
   const editTaskHandler = (values: ITask) => {
-    if (values.status === selectedColumn) {
+    if (values.category === selectedColumn) {
       dispatch(editTask({ values, tasks }));
     } else {
       const updatedTasks = {
         ...values,
-        status: selectedColumn,
+        category: selectedColumn,
       };
       dispatch(addTask({ updatedTasks, position: 0 }));
       dispatch(deleteTask(tasks));
@@ -88,16 +87,18 @@ export default function AddTask({ handleClose, tasks }: Props) {
             tasks
               ? {
                   id: tasks.id,
-                  title: tasks.title,
+                  name: tasks.name,
                   description: tasks.description,
-                  status: tasks.status,
+                  category: tasks.category,
+                  techniques: tasks.techniques,
                   subtasks: tasks.subtasks,
                 }
               : {
                   id: uuidv4(),
-                  title: "",
+                  name: "",
                   description: "",
-                  status: selectedColumn,
+                  category: selectedColumn,
+                  techniques: [],
                   subtasks: [],
                 }
           }
@@ -112,22 +113,22 @@ export default function AddTask({ handleClose, tasks }: Props) {
             <Form>
               <div className="my-6">
                 <TextInput
-                  label="Title"
-                  name="title"
+                  label="Name"
+                  name="name"
                   type="text"
-                  placeholder="e.g Take a coffee break"
+                  placeholder="e.g DLP alerts"
                 />
               </div>
               <div className="my-4">
                 <TextArea
-                  placeholder="e.g  It's always good to take a break"
+                  placeholder="e.g  Handle DLP alerts"
                   name="description"
                   label="Description"
                 />
               </div>
 
               <div className="mb-6">
-                <label className="text-sm font-bold">Subtasks</label>
+                <label className="text-sm font-bold">Workflows</label>
                 <FieldArray
                   name="subtasks"
                   render={(arrayHelpers) => (
@@ -143,7 +144,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                           />
                         ))}
                       <button
-                        aria-label="Add Subtasks"
+                        aria-label="Add workflow"
                         className="bg-white mt-2 font-bold text-sm text-primary p-2 w-full rounded-full"
                         type="button"
                         onClick={() => {
@@ -154,7 +155,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                           });
                         }}
                       >
-                        + Add New Subtask
+                        + Add new workflow
                       </button>
 
                       {values.subtasks.length >= 0 ? (
@@ -172,9 +173,11 @@ export default function AddTask({ handleClose, tasks }: Props) {
               </div>
 
               <div className="mb-6">
+                <p>Category</p>
                 <SelectBox
                   selectedColumn={selectedColumn}
                   setSelectedColumn={setSelectedColumn}
+                  tasks={tasks}
                 />
               </div>
 

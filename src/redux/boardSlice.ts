@@ -53,7 +53,7 @@ const boardSlice = createSlice({
       state.board.find((item: IBoard) =>
         item.id === state.active.id
           ? item.columns.find((o: IColumn) =>
-              o.name === action.payload.updatedTasks.status
+              o.name === action.payload.updatedTasks.category
                 ? o.tasks.splice(
                     action.payload.position,
                     0,
@@ -69,38 +69,77 @@ const boardSlice = createSlice({
     },
 
     deleteTask: (state, action) => {
-      state.board.find((item: IBoard) =>
-        item.name === state.active.name
-          ? item.columns.find((o: IColumn) =>
-              o.name === action.payload.status
-                ? (o.tasks = o.tasks.filter(
-                    (s: any) => s.title !== action.payload.title
-                  ))
-                : null
-            )
-          : null
-      );
+      // Update the board by mapping over each board item
+      state.board = state.board.map((boardItem: IBoard) => {
+        // Check if the board item is the active one
+        if (boardItem.name === state.active.name) {
+          // Return a new board item with the updated columns
+          return {
+            ...boardItem,
+            columns: boardItem.columns.map((column: IColumn) => {
+              // Check if the column is the one where the task needs to be deleted
+              if (column.name === action.payload.category) {
+                // Return a new column with the task filtered out
+                return {
+                  ...column,
+                  tasks: column.tasks.filter((task: ITask) => task.name !== action.payload.name)
+                };
+              }
+              // Return the column unchanged if it's not the target column
+              return column;
+            })
+          };
+        }
+        // Return the board item unchanged if it's not the active one
+        return boardItem;
+      });
+    
+      // Update the active state
       state.active = state.board.find(
         (item: IBoard) => item.id === state.active.id
       );
     },
     editTask: (state, action) => {
-      state.board.find((item: IBoard) =>
-        item.name === state.active.name
-          ? item.columns.find((o: IColumn) =>
-              o.name === action.payload.values.status
-                ? o.tasks.find((s: ITask) =>
-                    s.title === action.payload.tasks.title
-                      ? ((s.title = action.payload.values.title),
-                        (s.description = action.payload.values.description),
-                        (s.status = action.payload.values.status),
-                        (s.subtasks = action.payload.values.subtasks))
-                      : s
-                  )
-                : null
-            )
-          : null
-      );
+      // Create a new board array by mapping over each board item
+      state.board = state.board.map((boardItem: IBoard) => {
+        // Check if the board item is the active one
+        if (boardItem.name === state.active.name) {
+          // Return a new board item with updated columns
+          return {
+            ...boardItem,
+            columns: boardItem.columns.map((column: IColumn) => {
+              // Check if the column is the one containing the task to edit
+              if (column.name === action.payload.values.category) {
+                // Return a new column with updated tasks
+                return {
+                  ...column,
+                  tasks: column.tasks.map((task: ITask) => {
+                    // Check if the task is the one to edit
+                    if (task.name === action.payload.tasks.name) {
+                      // Return the updated task
+                      return {
+                        ...task,
+                        name: action.payload.values.name,
+                        description: action.payload.values.description,
+                        category: action.payload.values.category,
+                        subtasks: action.payload.values.subtasks,
+                      };
+                    }
+                    // Return the task unchanged if it's not the one to edit
+                    return task;
+                  })
+                };
+              }
+              // Return the column unchanged if it's not the target column
+              return column;
+            })
+          };
+        }
+        // Return the board item unchanged if it's not the active one
+        return boardItem;
+      });
+    
+      // Update the active state to reflect the current state of the active board
       state.active = state.board.find(
         (item: IBoard) => item.id === state.active.id
       );
@@ -109,9 +148,9 @@ const boardSlice = createSlice({
       state.board.find((item: IBoard) =>
         item.name === state.active.name
           ? item.columns.find((o: IColumn) =>
-              o.name === action.payload.tasks.status
+              o.name === action.payload.tasks.category
                 ? o.tasks.map((s: ITask) =>
-                    s.title === action.payload.tasks.title
+                    s.name === action.payload.tasks.name
                       ? s.subtasks.map((t: ISubTask, i: number) =>
                           i === action.payload.id
                             ? (t.isCompleted =

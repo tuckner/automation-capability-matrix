@@ -22,7 +22,7 @@ export default function Index({ selectedColumn, setSelectedColumn, tasks }: Prop
 
   const handleItemClick = (title: string) => {
     setSelectedColumn(title);
-    if (tasks?.status !== title && tasks !== undefined) {
+    if (tasks && 'status' in tasks && tasks.status !== title) {
       const updatedTasks = {
         ...tasks,
         id: uuidv4(),

@@ -4,13 +4,12 @@ import SelectBox from "../SelectBox";
 import { useState } from "react";
 import Popup from "components/Popup";
 import DeleteItem from "components/DeleteItem";
-import { useDispatch, useSelector } from "react-redux";
-import { appData, isCompletedToggle } from "redux/boardSlice";
+import { useSelector } from "react-redux";
+import { appData } from "redux/boardSlice";
 
 interface Props {
   subtasks: ISubTask[];
   tasks: ITask;
-  filtered: ISubTask[];
   index: number;
   handleClose: () => void;
   handleOpenModal: () => void;
@@ -19,11 +18,10 @@ interface Props {
 export default function TaskDetails({
   subtasks,
   tasks,
-  filtered,
   handleClose,
   handleOpenModal,
 }: Props) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const data = useSelector(appData);
   const active: IBoard = data.active;
 
@@ -38,20 +36,20 @@ export default function TaskDetails({
   );
   const [isOpenMenu, setOpenMenu] = useState(false);
   const [isDeleteTask, setDeleteTask] = useState(false);
-  const [checkedState, setCheckedState] = useState(
-    subtasks.map((o) => o.isCompleted === true)
-  );
+  // const [checkedState, setCheckedState] = useState(
+  //   subtasks.map((o) => o.isCompleted === false)
+  // );
   const handleOpenMenu = () => setOpenMenu(false);
-  const handleOnChange = (id: number) => {
-    if (id >= 0) {
-      const updatedCheckedState = checkedState.map((item, index) =>
-        index === id ? !item : item
-      );
+  // const handleOnChange = (id: number) => {
+  //   if (id >= 0) {
+  //     const updatedCheckedState = checkedState.map((item, index) =>
+  //       index === id ? !item : item
+  //     );
 
-      setCheckedState(updatedCheckedState);
-      dispatch(isCompletedToggle({ updatedCheckedState, id, tasks }));
-    }
-  };
+  //     setCheckedState(updatedCheckedState);
+  //     dispatch(isCompletedToggle({ updatedCheckedState, id, tasks }));
+  //   }
+  // };
 
   const editTaskHandler = () => {
     handleOpenModal();
@@ -63,7 +61,7 @@ export default function TaskDetails({
       {!isDeleteTask ? (
         <>
           <div className=" text-lg font-bold flex items-center justify-between">
-            <p className=""> {tasks.title}</p>{" "}
+            <p className=""> {tasks.name}</p>{" "}
             <div className="relative">
               <p>
                 <FiMoreVertical
@@ -94,7 +92,7 @@ export default function TaskDetails({
             <p className="text-sm text-gray my-6">
               {tasks.description ? tasks.description : "No description"}
             </p>
-            <p className=" text-sm font-bold mb-2 ">{`Substasks (${filtered.length} of ${tasks.subtasks.length})`}</p>
+            <p className=" text-sm font-bold mb-2 ">{`Workflows: ${tasks.subtasks.length}`}</p>
             <div
               className={`overflow-y-auto px-4 ${
                 tasks.subtasks.length >= 4 && "h-[10rem]"
@@ -106,17 +104,7 @@ export default function TaskDetails({
                     key={index}
                     className="dark:bg-secondary-dark bg-offwhite flex items-center gap-x-4 rounded-sm p-3 mt-2"
                   >
-                    <input
-                      type="checkbox"
-                      value={subtask.title}
-                      checked={checkedState[index]}
-                      onChange={() => handleOnChange(index)}
-                    />
-                    <p
-                      className={`${
-                        checkedState[index] && "line-through"
-                      } text-xs`}
-                    >
+                    <p>
                       {subtask.title}
                     </p>
                   </div>
@@ -140,7 +128,7 @@ export default function TaskDetails({
             setDeleteTask(false), handleClose();
           }}
           tasks={tasks}
-          name={tasks.title}
+          name={tasks.name}
         />
       )}
     </>

@@ -5,6 +5,7 @@ import eslint from 'vite-plugin-eslint'
 
 export default defineConfig({
   server: {
+    base: "<automation-capability-matrix>",
     host: '0.0.0.0',
     port: 3000,
   },

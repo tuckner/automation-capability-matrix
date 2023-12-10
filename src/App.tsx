@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import {  Collapse } from "@chakra-ui/react";
 
 function App() {
-  const [showSidebar,setShowSidebar] = useState<boolean>(true);
+  const [showSidebar,setShowSidebar] = useState<boolean>(false);
 
   useEffect(() => {
     localStorage.setItem("theme", "dark");

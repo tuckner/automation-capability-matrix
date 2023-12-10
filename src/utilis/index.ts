@@ -1,5 +1,6 @@
 import data from "data";
 import { IBoard, ITask } from "types";
+import { v4 as uuidv4 } from "uuid";
 
 export const loadState = () => {
   const initialState = {
@@ -7,13 +8,54 @@ export const loadState = () => {
     active: data.find((item: IBoard, index: number) => index === 0),
   };
   try {
-    const serializedState = localStorage.getItem("boarddata");
+    // const serializedState = localStorage.getItem("boarddata");
+    const serializedState = null;
     if (serializedState === null) {
       return initialState;
     }
     return JSON.parse(serializedState).board;
   } catch (err) {
     return undefined;
+  }
+};
+
+export const resetBoard = () => {
+  try {
+    localStorage.removeItem("boarddata");
+    location.reload();
+  } catch (err) {
+    console.error("Error resetting local storage:", err);
+  }
+};
+
+export const exportConfig = () => {
+  try {
+    const boardData = localStorage.getItem("boarddata");
+    if (boardData) {
+      const blob = new Blob([JSON.stringify([JSON.parse(boardData).board], null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = uuidv4() + ".json";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+  } catch (err) {
+    console.error("Error saving state to JSON file:", err);
+  }
+};
+
+export const importConfig = (file: File) => {
+  try {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const jsonData = event.target?.result as string;
+      const parsedData = JSON.parse(jsonData);
+      localStorage.setItem("boarddata", JSON.stringify(parsedData));
+    };
+    reader.readAsText(file);
+  } catch (err) {
+    console.error("Error loading JSON file:", err);
   }
 };
 
@@ -34,9 +76,9 @@ export const checkDuplicatedTask = (values: ITask, active: IBoard) => {
   let foundTask;
 
   active.columns.find((item) =>
-    item.name === values.status
+    item.name === values.name
       ? item.tasks.find((t: ITask) =>
-          t.title === values.title ? (foundTask = t) : null
+          t.name === values.name ? (foundTask = t) : null
         )
       : null
   );

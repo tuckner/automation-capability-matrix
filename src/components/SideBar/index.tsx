@@ -34,7 +34,7 @@ export default function Index({setShowSidebar, handleClose }: Props) {
         flex-col justify-between h-full left-0`}
       >
         <div>
-          <p className="pl-6 py-2 text-xs">ALL BOARDS({board.length})</p>
+          <p className="pl-6 py-2 text-xs">ALL BOARDS ({board.length})</p>
           <div>
             {board && (
               <>
@@ -63,12 +63,12 @@ export default function Index({setShowSidebar, handleClose }: Props) {
             )}
 
             <div
-              onClick={() => {
-                setIsOpen(true);
-              }}
+              // onClick={() => {
+              //   setIsOpen(true);
+              // }}
               className="pl-6 my-2 font-bold cursor-pointer text-primary hover:opacity-20"
             >
-              + Create New Board
+              + Create New Board <br></br>(Coming Soon)
             </div>
           </div>
         </div>

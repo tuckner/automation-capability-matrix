@@ -14,7 +14,7 @@ interface Props {
 function AddBoard({ handleClose, active }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
-  const  board :IBoard[] = data.board;
+  const board :IBoard[] = data.board;
   const toast = useToast();
 
   const TaskSchema = Yup.object().shape({
@@ -52,14 +52,14 @@ function AddBoard({ handleClose, active }: Props) {
   return (
     <div>
       <h1 className="font-bold pb-2 px-4">
-        {active ? "Edit" : "Add New"} Board
+        {active ? "Edit" : "Add new"} board
       </h1>
       <div className="overflow-y-auto  px-4">
         <Formik
           initialValues={
             active
               ? { id: active.id, name: active.name, columns: active.columns }
-              : { id: uuidv4(), name: "", columns: [] }
+              : { id: uuidv4(), name: "", columns: [{"id": uuidv4(), "name": "Alert Handling", tasks: []}, {"id": uuidv4(), "name": "Issue Tracking", tasks: []}, {"id": uuidv4(), "name": "Enrichment", tasks: []}, {"id": uuidv4(), "name": "User Interaction", tasks: []}, {"id": uuidv4(), "name": "Response", tasks: []}, {"id": uuidv4(), "name": "Continuity", tasks: []}, {"id": uuidv4(), "name": "Procedural", tasks: []}] }
           }
           validationSchema={TaskSchema}
           validateOnChange={false}
@@ -73,11 +73,11 @@ function AddBoard({ handleClose, active }: Props) {
                   label="Name"
                   name="name"
                   type="text"
-                  placeholder="e.g Take a coffee break"
+                  placeholder="e.g ACME Corp capabilities"
                 />
               </div>
               <div className="mb-6">
-                <label className="text-sm font-bold">columns</label>
+                <label className="text-sm font-bold">Columns</label>
                 <FieldArray
                   name="columns"
                   render={(arrayHelpers) => (
@@ -93,7 +93,7 @@ function AddBoard({ handleClose, active }: Props) {
                           />
                         ))}
                       <button
-                       aria-label="Add Column"
+                       aria-label="Add column"
                         className="bg-white mt-3 font-bold text-sm text-primary p-2 w-full rounded-full"
                         type="button"
                         onClick={() => {
@@ -104,7 +104,7 @@ function AddBoard({ handleClose, active }: Props) {
                           });
                         }}
                       >
-                        + Add New Column
+                        + Add new column
                       </button>
 
                       {values.columns.length >= 0 ? (
@@ -126,7 +126,7 @@ function AddBoard({ handleClose, active }: Props) {
                 className="bg-primary p-2 w-full text-sm rounded-full"
                 type="submit"
               >
-                {active ? "Update" : "Create"} Board
+                {active ? "Update" : "Create"} board
               </button>
             </Form>
           )}
