@@ -2,6 +2,9 @@
 
 The Automation Capability Matrix is a framework for analyzing automated workflows an organization has implemented.
 
+<img width="1470" alt="acm-screenshot" src="https://github.com/tuckner/automation-capability-matrix/assets/8551704/58496b2c-6f2c-42ba-9997-7afeae6414b1">
+
+
 ## Features
 - Add new capabilities with descriptions
 - Light/dark mode
