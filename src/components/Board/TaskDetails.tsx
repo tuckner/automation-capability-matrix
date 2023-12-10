@@ -112,8 +112,8 @@ export default function TaskDetails({
               })}
             </div>
           </div>
-          <div className="mt-6">
-            <p className="text-sm mb-1">Status</p>
+          <div className="mt-6 hidden">
+            <p className="text-sm mb-1">Category</p>
             <SelectBox
               selectedColumn={selectedColumn}
               handleClose={handleClose}

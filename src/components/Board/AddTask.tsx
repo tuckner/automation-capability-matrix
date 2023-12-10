@@ -81,7 +81,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
   return (
     <div>
       <h1 className="font-bold pb-2 px-4">{tasks ? "Edit" : "Add New"} Task</h1>
-      <div className="overflow-y-auto h-[30rem] px-4">
+      <div className="overflow-y-auto h-[25rem] px-4">
         <Formik
           initialValues={
             tasks
@@ -172,7 +172,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                 />
               </div>
 
-              <div className="mb-6">
+              <div className="mb-6 hidden">
                 <p>Category</p>
                 <SelectBox
                   selectedColumn={selectedColumn}
