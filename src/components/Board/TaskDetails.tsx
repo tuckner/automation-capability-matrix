@@ -89,11 +89,11 @@ export default function TaskDetails({
             </div>
           </div>
           <div>
-            <p className="text-sm text-gray my-4">
+            <p className="text-sm my-4">
               {tasks.description ? tasks.description : "No description"}
             </p>
             Techniques:
-            <p className="text-sm text-gray my-3">
+            <p className="text-sm my-3">
               {tasks.techniques && tasks.techniques.map((technique: string, index: number) => (
                 <li key={index}>{technique}</li>
               ))}
