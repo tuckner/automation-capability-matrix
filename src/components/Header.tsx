@@ -148,7 +148,7 @@ export default function Header() {
             //   },
             // },
             {
-              title: "Reset board",
+              title: "Reset configuration",
               handler: resetBoard,
             },
           ]}

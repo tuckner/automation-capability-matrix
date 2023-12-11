@@ -63,12 +63,12 @@ export default function Index({setShowSidebar, handleClose }: Props) {
             )}
 
             <div
-              // onClick={() => {
-              //   setIsOpen(true);
-              // }}
+              onClick={() => {
+                setIsOpen(true);
+              }}
               className="pl-6 my-2 font-bold cursor-pointer text-primary hover:opacity-20"
             >
-              + Create New Board <br></br>(Coming Soon)
+              + Create New Board
             </div>
           </div>
         </div>
