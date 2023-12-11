@@ -145,7 +145,7 @@
       "category": "Response",
       "id": 5013,
       "last_edited": "2023-11-26T13:14:00.000Z",
-      "description": "The ability to modify or update a user\u2019s group membership. This could be moving the user from a normal group to a different group which has different conditional access properties, such as requiring additional multi-factor authentication, or by moving a user to a limited access group.",
+      "description": "The ability to modify or update a user's group membership. This could be moving the user from a normal group to a different group which has different conditional access properties, such as requiring additional multi-factor authentication, or by moving a user to a limited access group.",
       "services": [],
       "techniques": [
         "Move administrator account to a limited privilege group due to unusual external login",
@@ -161,7 +161,7 @@
       "category": "Enrichment",
       "id": 3007,
       "last_edited": "2023-11-26T13:14:00.000Z",
-      "description": "False positive alerts are not preventable in any security operations center. Either through poor detection logic or faulty vendor rule updates, minimizing the potential impact of conditions outside of your team\u2019s control is critical. Curating lists of match conditions or basic text regular expressions that can be applied to alerts can help triage problems and cut down on noise quickly. While ignoring alerts in this manner is not a long term strategy, it is a good tool to alleviate a sudden increase in alerts which could cause real incidents to be missed.",
+      "description": "False positive alerts are not preventable in any security operations center. Either through poor detection logic or faulty vendor rule updates, minimizing the potential impact of conditions outside of your team's control is critical. Curating lists of match conditions or basic text regular expressions that can be applied to alerts can help triage problems and cut down on noise quickly. While ignoring alerts in this manner is not a long term strategy, it is a good tool to alleviate a sudden increase in alerts which could cause real incidents to be missed.",
       "services": [],
       "techniques": [
         "Create a list of noisy hosts generating alerts should be either be deprioritized or ignored",
@@ -283,7 +283,7 @@
       "description": "Many effective attacks like phishing often use branding and language that is designed to trick people into believing that the email or website is legitimate. It is important for security operations to take down phishing websites as soon as they are discovered.",
       "services": [],
       "techniques": [
-        "Submit take down requests to providers with "
+        "Submit take down requests to providers with Phish Report "
       ],
       "examples": [
         "https://www.tines.com/story-library/1168801/create-a-takedown-case-in-phish-report"
@@ -383,10 +383,10 @@
       "category": "Response",
       "id": 5008,
       "last_edited": "2023-12-02T21:53:00.000Z",
-      "description": "Invalidate current password based credentials without disabling a user account. Sometimes known as \u2018forced password change\u2019. Helpful in situations when an account could be compromised, but does not have any identifiable information that it has been utilized maliciously.",
+      "description": "Invalidate current password based credentials without disabling a user account. Sometimes known as 'forced password change'. Helpful in situations when an account could be compromised, but does not have any identifiable information that it has been utilized maliciously.",
       "services": [],
       "techniques": [
-        "If publicly compromised password hashes (\u201dHave I Been Pwned\u201d among other services) match current passwords, force password change on user."
+        "If publicly compromised password hashes ('Have I Been Pwned' among other services) match current passwords, force password change on user."
       ],
       "examples": [
         "https://www.tines.com/story-library/1139843/invalidate-user-s-password-in-azure-active-directory",
@@ -423,7 +423,7 @@
       "services": [],
       "techniques": [
         "Change visibility settings of an S3 bucket to prevent public and anonymous access",
-        "Change sharing of Google Drive documents to prevent access from \u201canyone with the link\u201d",
+        "Change sharing of Google Drive documents to prevent access from anyone with the link",
         "Revert EBS snapshots that may contain sensitive data from becoming public",
         "Change GitHub repository settings from public to private"
       ],
@@ -661,7 +661,7 @@
       "services": [],
       "techniques": [
         "Understand DKIM headers, check if SPF passes, and derive a DMARC verdict on the message to prevent email spoofing",
-        "Lookup email sender reputation in Sublime Security\u2019s emailrep.io"
+        "Lookup email sender reputation in Sublime Security's emailrep.io"
       ],
       "examples": [
         "https://www.tines.com/library/stories/1189751/analyze-phishing-email-senders-urls-attachments"
@@ -689,7 +689,7 @@
       "category": "User Interaction",
       "id": 4010,
       "last_edited": "2023-11-26T13:14:00.000Z",
-      "description": "If an individual notified of a potential incident doesn\u2019t respond to a cybersecurity alert in situations where the alert indicates a potential risk or threat that requires immediate attention. In these cases, it may be necessary to involve the user's manager in order to ensure that the issue is addressed promptly and effectively. For example, if a user has clicked on a phishing link and their manager is in a better position to help them understand the implications and take appropriate action, it may be necessary to escalate the alert to their manager. Additionally, if a user is not responding to the alert for an extended period of time, it may be necessary to involve their manager in order to ensure that the issue is addressed in a timely manner.",
+      "description": "If an individual notified of a potential incident doesn't respond to a cybersecurity alert in situations where the alert indicates a potential risk or threat that requires immediate attention. In these cases, it may be necessary to involve the user's manager in order to ensure that the issue is addressed promptly and effectively. For example, if a user has clicked on a phishing link and their manager is in a better position to help them understand the implications and take appropriate action, it may be necessary to escalate the alert to their manager. Additionally, if a user is not responding to the alert for an extended period of time, it may be necessary to involve their manager in order to ensure that the issue is addressed in a timely manner.",
       "services": [],
       "techniques": [
         "After an hour, if a user has not replied to a message, send a new message to their team or their manager"
@@ -724,7 +724,7 @@
       "description": "Notifying users of cybersecurity alerts they were involved in is helpful for cybersecurity because it can help users understand the potential risks and implications of their actions, which can encourage them to be more careful and cautious in the future. By providing users with clear and timely information about the alert, the security team can help users understand what happened and what they can do to protect themselves and their data. This can also help users to recognize and avoid similar risks in the future, which can reduce the likelihood of future incidents. Additionally, by engaging with users and providing them with information about the alert, the security team can build trust and collaboration, which can improve the overall security posture of the organization.",
       "services": [],
       "techniques": [
-        "Utilize Slack\u2019s ",
+        "Utilize Slack's ",
         "Microsoft Teams direct user messages"
       ],
       "examples": [
@@ -829,7 +829,7 @@
       "techniques": [
         "Lookup employee location in BambooHR",
         "Find supervisor for employee in order to escalate notifications",
-        "Set user authentication group depending on user\u2019s business unit"
+        "Set user authentication group depending on user's business unit"
       ],
       "examples": [
         "https://www.tines.com/story-library/1186133/enrich-a-user-with-their-organization-details-in-azure-active-directory"
@@ -944,8 +944,8 @@
       "description": "Responding promptly in security operations is crucial for the protection and integrity of an organization's digital assets. Leveraging platforms which provide the ability to run remote commands on endpoints, organizations can detect, investigate, analyze, and mitigate potential threats before they escalate into significant incidents. This proactive approach not only prevents data breaches and system compromises but also reinforces the organization's commitment to safeguarding its stakeholders' interests.",
       "services": [],
       "techniques": [
-        "Utilize the \u2018Real Time Response\u2019 feature of CrowdStrike to execute commands and scripts for investigation and artifact gathering.",
-        "Check for a file existing on all hosts in a specific folder using LimaCharlie\u2019s remote command features."
+        "Utilize the 'Real Time Response' feature of CrowdStrike to execute commands and scripts for investigation and artifact gathering.",
+        "Check for a file existing on all hosts in a specific folder using LimaCharlie's remote command features."
       ],
       "examples": [
         "https://www.tines.com/story-library/87621/run-a-crowdstrike-real-time-response-command",
@@ -1163,7 +1163,7 @@
       "category": "Procedural",
       "id": 7006,
       "last_edited": "2023-11-26T13:14:00.000Z",
-      "description": "A reliable source of truth is valuable for any security operations team and even more so in a security automation program. Most importantly is the ability to make sure that source of truth is up to date and contains any assets that might not be tracked by conventional means. Often organizations must deploy network equipment or specialized equipment without standard tracking agents being installed. Many organizations may utilize many different tools for discovering untracked assets and unapproved assets. By identifying assets regularly and through different means, there will be a better understanding of your organization\u2019s attack surface and discover potential risks.",
+      "description": "A reliable source of truth is valuable for any security operations team and even more so in a security automation program. Most importantly is the ability to make sure that source of truth is up to date and contains any assets that might not be tracked by conventional means. Often organizations must deploy network equipment or specialized equipment without standard tracking agents being installed. Many organizations may utilize many different tools for discovering untracked assets and unapproved assets. By identifying assets regularly and through different means, there will be a better understanding of your organization's attack surface and discover potential risks.",
       "services": [],
       "techniques": [
         "Run a scan in Tenable and cross reference with known asset lists",
