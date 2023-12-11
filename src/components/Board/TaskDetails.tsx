@@ -60,8 +60,8 @@ export default function TaskDetails({
     <>
       {!isDeleteTask ? (
         <>
-          <div className=" text-lg font-bold flex items-center justify-between">
-            <p className=""> {tasks.name}</p>{" "}
+          <div className="text-lg font-bold flex items-center justify-between">
+            <p className="">{tasks.name}</p>{" "}
             <div className="relative">
               <p>
                 <FiMoreVertical
@@ -87,6 +87,9 @@ export default function TaskDetails({
                 />
               )}
             </div>
+          </div>
+          <div className="text-xs text-gray my-2">
+              <p>ID: A{tasks.id}</p>
           </div>
           <div>
             <p className="text-sm my-4">
