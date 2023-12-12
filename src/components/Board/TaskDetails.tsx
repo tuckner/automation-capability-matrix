@@ -6,6 +6,7 @@ import Popup from "components/Popup";
 import DeleteItem from "components/DeleteItem";
 import { useSelector } from "react-redux";
 import { appData } from "redux/boardSlice";
+import Linkify from "linkify-react";
 
 interface Props {
   subtasks: ISubTask[];
@@ -24,6 +25,9 @@ export default function TaskDetails({
   // const dispatch = useDispatch();
   const data = useSelector(appData);
   const active: IBoard = data.active;
+  const linkoptions = {
+    className: "underline",
+  };
 
   const [selectedColumn, setSelectedColumn] = useState<string | any>(
     tasks
@@ -93,13 +97,17 @@ export default function TaskDetails({
           </div>
           <div>
             <p className="text-sm my-4">
-              {tasks.description ? tasks.description : "No description"}
+              <Linkify as="p" options={linkoptions}>
+                {tasks.description ? tasks.description : "No description"}
+              </Linkify>
             </p>
             <p className=" text-sm font-bold mb-2 ">Techniques:</p>
             <p className="text-sm my-3">
-              {tasks.techniques && tasks.techniques.map((technique: string, index: number) => (
-                <li key={index}>{technique}</li>
-              ))}
+              <Linkify as="p" options={linkoptions}>   
+                {tasks.techniques && tasks.techniques.map((technique: string, index: number) => (
+                    <li key={index}>{technique}</li>
+                ))}
+              </Linkify>
             </p>
             <p className=" text-sm font-bold mb-2 ">{`Workflows: ${tasks.subtasks.length}`}</p>
             <div
