@@ -20,6 +20,9 @@ The Automation Capability Matrix is a framework for analyzing automated workflow
 - More matrices
 - References in capabilities
 - API
+- Linked workflow view
+- Accounts
+- Metrics & dashboard
 
 ## Run
 
