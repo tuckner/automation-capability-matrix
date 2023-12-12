@@ -46,7 +46,7 @@ export default function TaskItem({ tasks, index }: Props) {
                               className=""
                               onClick={handleOpenModal}
                               style={{
-                                color: tasks.subtasks.length === 1 ? "#e6e22e" : tasks.subtasks.length === 2 ? "#8fb935" : "#e64747"
+                                color: tasks.subtasks.length === 1 ? "#e6e22e" : tasks.subtasks.length >= 2 ? "#238823" : "#e64747"
                               }}
                             />
                           </div>
