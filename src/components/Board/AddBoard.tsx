@@ -104,7 +104,7 @@ function AddBoard({ handleClose, active }: Props) {
                           });
                         }}
                       >
-                        + Add new column
+                        + Add new category
                       </button>
 
                       {values.columns.length >= 0 ? (
