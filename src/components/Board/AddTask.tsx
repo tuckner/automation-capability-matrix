@@ -80,7 +80,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
 
   return (
     <div>
-      <h1 className="font-bold pb-2 px-4">{tasks ? "Edit" : "Add New"} Task</h1>
+      <h1 className="font-bold pb-2 px-4">{tasks ? "Edit" : "Add new"} capability</h1>
       <div className="overflow-y-auto h-[25rem] px-4">
         <Formik
           initialValues={
