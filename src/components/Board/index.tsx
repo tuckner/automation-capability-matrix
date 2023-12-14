@@ -109,7 +109,7 @@ export default function Index() {
                 onClick={() => setEditBoard(true)}
                 className="h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
               >
-                <p className="text-xl text-gray font-bold"> + New Column</p>
+                <p className="text-xl text-gray font-bold"> + New Category</p>
               </div>
             </div>
           </DragDropContext>
