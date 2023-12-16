@@ -14,7 +14,7 @@ import SideBar from "./SideBar";
 import { useSelector } from "react-redux";
 import { appData } from "redux/boardSlice";
 import { IBoard } from "types";
-import { exportConfig, resetBoard } from "utilis";
+import { exportConfig, resetBoard, handleFilterChange } from "utilis";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,7 +69,20 @@ export default function Header() {
                   </span>
                 </div>
               )}
+
               <div className="flex items-center">
+              <div className="pr-4"></div>
+              <div className="flex items-center">
+                <label htmlFor="Search" className="sr-only"> Search </label>
+                <input
+                  type="text"
+                  id="Search"
+                  placeholder="Filter..."
+                  onChange={(e) => handleFilterChange(e.target.value)}
+                  className="w-full rounded-md border-gray-200 py-2.5 pl-3 pe-10 shadow-sm sm:text-sm"
+                />
+              </div>
+              <div className="pr-4"></div>
                 <button
                   aria-label="Add capability"
                   onClick={() => setIsOpen(true)}
