@@ -14,7 +14,7 @@ interface Props {
 function AddBoard({ handleClose, active }: Props) {
   const dispatch = useDispatch();
   const data = useSelector(appData);
-  const board :IBoard[] = data.board;
+  const board: IBoard[] = data.board;
   const toast = useToast();
 
   const TaskSchema = Yup.object().shape({
@@ -59,7 +59,19 @@ function AddBoard({ handleClose, active }: Props) {
           initialValues={
             active
               ? { id: active.id, name: active.name, columns: active.columns }
-              : { id: uuidv4(), name: "", columns: [{"id": uuidv4(), "name": "Alert Handling", tasks: []}, {"id": uuidv4(), "name": "Issue Tracking", tasks: []}, {"id": uuidv4(), "name": "Enrichment", tasks: []}, {"id": uuidv4(), "name": "User Interaction", tasks: []}, {"id": uuidv4(), "name": "Response", tasks: []}, {"id": uuidv4(), "name": "Continuity", tasks: []}, {"id": uuidv4(), "name": "Procedural", tasks: []}] }
+              : {
+                  id: uuidv4(),
+                  name: "",
+                  columns: [
+                    { id: uuidv4(), name: "Alert Handling", tasks: [] },
+                    { id: uuidv4(), name: "Issue Tracking", tasks: [] },
+                    { id: uuidv4(), name: "Enrichment", tasks: [] },
+                    { id: uuidv4(), name: "User Interaction", tasks: [] },
+                    { id: uuidv4(), name: "Response", tasks: [] },
+                    { id: uuidv4(), name: "Continuity", tasks: [] },
+                    { id: uuidv4(), name: "Procedural", tasks: [] },
+                  ],
+                }
           }
           validationSchema={TaskSchema}
           validateOnChange={false}
@@ -93,7 +105,7 @@ function AddBoard({ handleClose, active }: Props) {
                           />
                         ))}
                       <button
-                       aria-label="Add column"
+                        aria-label="Add column"
                         className="bg-white mt-3 font-bold text-sm text-primary p-2 w-full rounded-full"
                         type="button"
                         onClick={() => {
@@ -122,7 +134,7 @@ function AddBoard({ handleClose, active }: Props) {
               </div>
 
               <button
-               aria-label="Board"
+                aria-label="Board"
                 className="bg-primary p-2 w-full text-sm rounded-full"
                 type="submit"
               >

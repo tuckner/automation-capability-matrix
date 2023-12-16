@@ -31,18 +31,16 @@ export default function AddTask({ handleClose, tasks }: Props) {
         )?.name
   );
 
-
   const TaskSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
     description: Yup.string(),
     category: Yup.string().required("Required"),
-    subtasks: Yup.array()
-      .of(
-        Yup.object().shape({
-          title: Yup.string(),
-          isCompleted: Yup.boolean(),
-        })
-      ),
+    subtasks: Yup.array().of(
+      Yup.object().shape({
+        title: Yup.string(),
+        isCompleted: Yup.boolean(),
+      })
+    ),
   });
 
   const addTaskHandler = (values: ITask) => {
@@ -80,7 +78,9 @@ export default function AddTask({ handleClose, tasks }: Props) {
 
   return (
     <div>
-      <h1 className="font-bold pb-2 px-4">{tasks ? "Edit" : "Add new"} capability</h1>
+      <h1 className="font-bold pb-2 px-4">
+        {tasks ? "Edit" : "Add new"} capability
+      </h1>
       <div className="overflow-y-auto h-[25rem] px-4">
         <Formik
           initialValues={

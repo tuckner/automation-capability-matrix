@@ -41,25 +41,30 @@ export default function TaskItem({ tasks, index }: Props) {
                 {tasks.subtasks.length} workflows
               </p>
               <div className="pt-2 text-xs text-gray content-end font-bold">
-                          {" "}
-                          <div className="flex justify-end">
-                            <BsCircleFill
-                              className=""
-                              onClick={handleOpenModal}
-                              style={{
-                                color: tasks.subtasks.length === 1 ? "#e6e22e" : tasks.subtasks.length >= 2 ? "#238823" : "#e64747"
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }}
-                </Draggable>
-                {/* <Icon type="board" /> */}
-                <Modal open={isOpen} handleClose={() => setIsOpen(false)}>
-                  <TaskDetails
-                    subtasks={tasks.subtasks}
+                {" "}
+                <div className="flex justify-end">
+                  <BsCircleFill
+                    className=""
+                    onClick={handleOpenModal}
+                    style={{
+                      color:
+                        tasks.subtasks.length === 1
+                          ? "#e6e22e"
+                          : tasks.subtasks.length >= 2
+                          ? "#238823"
+                          : "#e64747",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        }}
+      </Draggable>
+      {/* <Icon type="board" /> */}
+      <Modal open={isOpen} handleClose={() => setIsOpen(false)}>
+        <TaskDetails
+          subtasks={tasks.subtasks}
           tasks={tasks}
           handleClose={() => setIsOpen(false)}
           index={index}

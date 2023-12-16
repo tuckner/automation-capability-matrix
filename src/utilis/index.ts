@@ -32,10 +32,10 @@ export const exportConfig = () => {
   try {
     const boardData = localStorage.getItem("boarddata");
     if (boardData) {
-      const raw = JSON.parse(boardData).board
-      const data = {"schema": 1, "config": raw}
-      data.config.active = 0
-      const acmexport = JSON.stringify(data, null, 2)
+      const raw = JSON.parse(boardData).board;
+      const data = { schema: 1, config: raw };
+      data.config.active = 0;
+      const acmexport = JSON.stringify(data, null, 2);
       const blob = new Blob([acmexport], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -87,11 +87,11 @@ export const saveState = (state: any) => {
     const serializesState = JSON.stringify(state);
     localStorage.setItem("boarddata", serializesState);
   } catch (err) {
-    return err
+    return err;
   }
 };
 
-export const  checkDuplicatedBoard = (values: IBoard, board: IBoard[]) => {
+export const checkDuplicatedBoard = (values: IBoard, board: IBoard[]) => {
   return board.some((el: IBoard) => el.name === values.name);
 };
 

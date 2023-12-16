@@ -93,7 +93,7 @@ export default function TaskDetails({
             </div>
           </div>
           <div className="text-xs text-gray my-2">
-              <p>ID: A{tasks.id}</p>
+            <p>ID: A{tasks.id}</p>
           </div>
           <div>
             <p className="text-sm my-4">
@@ -103,10 +103,11 @@ export default function TaskDetails({
             </p>
             <p className=" text-sm font-bold mb-2 ">Techniques:</p>
             <p className="text-sm my-3">
-              <Linkify as="p" options={linkoptions}>   
-                {tasks.techniques && tasks.techniques.map((technique: string, index: number) => (
+              <Linkify as="p" options={linkoptions}>
+                {tasks.techniques &&
+                  tasks.techniques.map((technique: string, index: number) => (
                     <li key={index}>{technique}</li>
-                ))}
+                  ))}
               </Linkify>
             </p>
             <p className=" text-sm font-bold mb-2 ">{`Workflows: ${tasks.subtasks.length}`}</p>
@@ -121,9 +122,7 @@ export default function TaskDetails({
                     key={index}
                     className="dark:bg-secondary-dark bg-offwhite flex items-center gap-x-4 rounded-sm p-3 mt-2"
                   >
-                    <p>
-                      {subtask.title}
-                    </p>
+                    <p>{subtask.title}</p>
                   </div>
                 );
               })}
