@@ -23,6 +23,7 @@ export default function TaskItem({ tasks, index }: Props) {
         {(provided, snapshot) => {
           return (
             <div
+              id="task-item"
               ref={provided.innerRef}
               data-snapshot={snapshot}
               {...provided.draggableProps}
