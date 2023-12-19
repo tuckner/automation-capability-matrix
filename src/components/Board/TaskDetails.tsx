@@ -101,15 +101,20 @@ export default function TaskDetails({
                 {tasks.description ? tasks.description : "No description"}
               </Linkify>
             </p>
-            <p className=" text-sm font-bold mb-2 ">Techniques:</p>
-            <p className="text-sm my-3">
-              <Linkify as="p" options={linkoptions}>
-                {tasks.techniques &&
-                  tasks.techniques.map((technique: string, index: number) => (
-                    <li key={index}>{technique}</li>
-                  ))}
-              </Linkify>
-            </p>
+            {tasks.techniques && tasks.techniques.length > 0 && (
+              <>
+                <p className="text-sm font-bold mb-2">Techniques:</p>
+                <p className="text-sm my-3">
+                  <Linkify as="p" options={linkoptions}>
+                    {tasks.techniques.map(
+                      (technique: string, index: number) => (
+                        <li key={index}>{technique}</li>
+                      )
+                    )}
+                  </Linkify>
+                </p>
+              </>
+            )}
             <p className=" text-sm font-bold mb-2 ">{`Workflows: ${tasks.subtasks.length}`}</p>
             <div
               className={`overflow-y-auto px-4 ${

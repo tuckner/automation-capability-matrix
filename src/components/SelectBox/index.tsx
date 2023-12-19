@@ -4,7 +4,7 @@ import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { IBoard, IColumn, ITask } from "types";
 import { addTask, appData, deleteTask } from "redux/boardSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+
 interface Props {
   selectedColumn: string;
   setSelectedColumn: Dispatch<SetStateAction<string>>;
@@ -25,7 +25,7 @@ export default function Index({ selectedColumn, setSelectedColumn, tasks }: Prop
     if (tasks && 'status' in tasks && tasks.status !== title) {
       const updatedTasks = {
         ...tasks,
-        id: uuidv4().slice(5),
+        id: tasks.id,
         status: title,
       };
       dispatch(addTask({ updatedTasks, position: 0 }));

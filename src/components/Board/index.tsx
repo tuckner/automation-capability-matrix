@@ -10,8 +10,6 @@ import { addTask, appData, deleteTask } from "redux/boardSlice";
 import { Droppable, DragDropContext } from "@hello-pangea/dnd";
 // import { randomColor } from "utilis";
 
-import { v4 as uuidv4 } from "uuid";
-
 export default function Index() {
   const data = useSelector(appData);
   const dispatch = useDispatch();
@@ -36,7 +34,7 @@ export default function Index() {
     dispatch(deleteTask(sourceTask));
     const updatedTasks = {
       ...sourceTask,
-      id: uuidv4().slice(5),
+      id: sourceTask?.id,
       status: result.destination.droppableId,
     };
     const position = result.destination.index;
