@@ -25,7 +25,7 @@ export default function Index({ selectedColumn, setSelectedColumn, tasks }: Prop
     if (tasks && 'status' in tasks && tasks.status !== title) {
       const updatedTasks = {
         ...tasks,
-        id: uuidv4(),
+        id: uuidv4().slice(5),
         status: title,
       };
       dispatch(addTask({ updatedTasks, position: 0 }));

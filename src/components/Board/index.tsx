@@ -36,7 +36,7 @@ export default function Index() {
     dispatch(deleteTask(sourceTask));
     const updatedTasks = {
       ...sourceTask,
-      id: uuidv4(),
+      id: uuidv4().slice(5),
       status: result.destination.droppableId,
     };
     const position = result.destination.index;

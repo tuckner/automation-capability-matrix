@@ -94,7 +94,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                   subtasks: tasks.subtasks,
                 }
               : {
-                  id: uuidv4(),
+                  id: uuidv4().slice(5),
                   name: "",
                   description: "",
                   category: selectedColumn,
@@ -149,7 +149,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                         type="button"
                         onClick={() => {
                           arrayHelpers.push({
-                            id: uuidv4(),
+                            id: uuidv4().slice(5),
                             title: "",
                             isCompleted: false,
                           });
