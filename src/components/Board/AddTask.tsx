@@ -172,7 +172,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                 />
               </div>
 
-              <div className="mb-6 hidden">
+              <div className="mb-6">
                 <p>Category</p>
                 <SelectBox
                   selectedColumn={selectedColumn}
@@ -182,7 +182,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
               </div>
 
               <button
-                aria-label="Create Task"
+                aria-label="Create capability"
                 className="bg-primary p-2 w-full text-sm rounded-full"
                 type="submit"
               >
