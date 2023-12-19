@@ -20,7 +20,6 @@ export default function Index() {
   const [isOpenBoard, setOpenBoard] = useState(false);
   const [isEditBoard, setEditBoard] = useState(false);
 
-
   const onDragEnd = (result: any) => {
     if (!result.destination) {
       return;
@@ -69,7 +68,7 @@ export default function Index() {
                     />
                     {item.name} ({item.tasks.length})
                   </p>
-                  <Droppable droppableId={`${item.name}`}>
+                  <Droppable droppableId={`${item.name}`} type={`${item.name}`}>
                     {(provided) => (
                       <div
                         {...provided.droppableProps}
@@ -121,7 +120,7 @@ export default function Index() {
             className="font-bold text-xl cursor-pointer text-primary hover:opacity-20
       fixed -translate-y-[50%] -translate-x-[50%] top-[50%] left-[50%]"
           >
-            + Create New Board
+            + Create new board
           </div>
         )}
       </div>
