@@ -186,7 +186,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                 className="bg-primary p-2 w-full text-sm rounded-full"
                 type="submit"
               >
-                {tasks ? "Update" : "Create"} Task
+                {tasks ? "Update" : "Create"} capability
               </button>
             </Form>
           )}
