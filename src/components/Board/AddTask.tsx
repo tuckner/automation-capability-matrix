@@ -10,6 +10,10 @@ import { checkDuplicatedTask } from "utilis";
 import { useToast } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 
+const generateRandomNumber = (): string => {
+  return String(Math.floor(Math.random() * (9999 - 9000 + 1)) + 9000);
+};
+
 interface Props {
   handleClose: () => void;
   tasks?: ITask;
@@ -31,18 +35,16 @@ export default function AddTask({ handleClose, tasks }: Props) {
         )?.name
   );
 
-
   const TaskSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
     description: Yup.string(),
     category: Yup.string().required("Required"),
-    subtasks: Yup.array()
-      .of(
-        Yup.object().shape({
-          title: Yup.string(),
-          isCompleted: Yup.boolean(),
-        })
-      ),
+    subtasks: Yup.array().of(
+      Yup.object().shape({
+        title: Yup.string(),
+        isCompleted: Yup.boolean(),
+      })
+    ),
   });
 
   const addTaskHandler = (values: ITask) => {
@@ -80,7 +82,9 @@ export default function AddTask({ handleClose, tasks }: Props) {
 
   return (
     <div>
-      <h1 className="font-bold pb-2 px-4">{tasks ? "Edit" : "Add New"} Task</h1>
+      <h1 className="font-bold pb-2 px-4">
+        {tasks ? "Edit" : "Add new"} capability
+      </h1>
       <div className="overflow-y-auto h-[25rem] px-4">
         <Formik
           initialValues={
@@ -94,7 +98,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                   subtasks: tasks.subtasks,
                 }
               : {
-                  id: uuidv4(),
+                  id: generateRandomNumber(),
                   name: "",
                   description: "",
                   category: selectedColumn,
@@ -172,7 +176,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                 />
               </div>
 
-              <div className="mb-6 hidden">
+              <div className="mb-6">
                 <p>Category</p>
                 <SelectBox
                   selectedColumn={selectedColumn}
@@ -182,11 +186,11 @@ export default function AddTask({ handleClose, tasks }: Props) {
               </div>
 
               <button
-                aria-label="Create Task"
+                aria-label="Create capability"
                 className="bg-primary p-2 w-full text-sm rounded-full"
                 type="submit"
               >
-                {tasks ? "Update" : "Create"} Task
+                {tasks ? "Update" : "Create"} capability
               </button>
             </Form>
           )}

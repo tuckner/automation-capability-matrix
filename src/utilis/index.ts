@@ -76,6 +76,25 @@ export const resetBoard = () => {
   }
 };
 
+export const handleFilterChange = (newFilter: string | null) => {
+  if (newFilter !== null) {
+    const taskItems = document.querySelectorAll("div#task-item");
+    taskItems.forEach((taskItem) => {
+      const taskName = taskItem.textContent?.toLowerCase();
+      if (taskName && taskName.includes(newFilter.toLowerCase())) {
+        (taskItem as HTMLElement).style.opacity = "1";
+      } else {
+        (taskItem as HTMLElement).style.opacity = "0.2";
+      }
+    });
+  } else {
+    const taskItems = document.querySelectorAll("div#task-item");
+    taskItems.forEach((taskItem) => {
+      (taskItem as HTMLElement).style.display = "1";
+    });
+  }
+};
+
 export const saveState = (state: any) => {
   try {
     const serializesState = JSON.stringify(state);

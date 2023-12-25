@@ -10,8 +10,6 @@ import { addTask, appData, deleteTask } from "redux/boardSlice";
 import { Droppable, DragDropContext } from "@hello-pangea/dnd";
 // import { randomColor } from "utilis";
 
-import { v4 as uuidv4 } from "uuid";
-
 export default function Index() {
   const data = useSelector(appData);
   const dispatch = useDispatch();
@@ -19,7 +17,6 @@ export default function Index() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenBoard, setOpenBoard] = useState(false);
   const [isEditBoard, setEditBoard] = useState(false);
-
 
   const onDragEnd = (result: any) => {
     if (!result.destination) {
@@ -37,7 +34,7 @@ export default function Index() {
     dispatch(deleteTask(sourceTask));
     const updatedTasks = {
       ...sourceTask,
-      id: uuidv4(),
+      id: sourceTask?.id,
       status: result.destination.droppableId,
     };
     const position = result.destination.index;
@@ -69,7 +66,7 @@ export default function Index() {
                     />
                     {item.name} ({item.tasks.length})
                   </p>
-                  <Droppable droppableId={`${item.name}`}>
+                  <Droppable droppableId={`${item.name}`} type={`${item.name}`}>
                     {(provided) => (
                       <div
                         {...provided.droppableProps}
@@ -109,7 +106,7 @@ export default function Index() {
                 onClick={() => setEditBoard(true)}
                 className="h-full dark:bg-secondary/20 cursor-pointer flex flex-col justify-center text-center rounded-lg"
               >
-                <p className="text-xl text-gray font-bold"> + New Column</p>
+                <p className="text-xl text-gray font-bold"> + New category</p>
               </div>
             </div>
           </DragDropContext>
@@ -121,7 +118,7 @@ export default function Index() {
             className="font-bold text-xl cursor-pointer text-primary hover:opacity-20
       fixed -translate-y-[50%] -translate-x-[50%] top-[50%] left-[50%]"
           >
-            + Create New Board
+            + Create new board
           </div>
         )}
       </div>
