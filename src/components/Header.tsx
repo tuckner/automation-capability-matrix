@@ -14,7 +14,7 @@ import SideBar from "./SideBar";
 import { useSelector } from "react-redux";
 import { appData } from "redux/boardSlice";
 import { IBoard } from "types";
-import { exportConfig, resetBoard, handleFilterChange } from "utilis";
+import { exportConfig, resetBoard, importConfig, handleFilterChange } from "utilis";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -163,6 +163,10 @@ export default function Header() {
             {
               title: "Reset configuration",
               handler: resetBoard,
+            },
+            {
+              title: "Import configuration",
+              handler: importConfig,
             },
           ]}
         />

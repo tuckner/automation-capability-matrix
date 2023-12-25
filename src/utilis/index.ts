@@ -19,15 +19,6 @@ export const loadState = () => {
   }
 };
 
-export const resetBoard = () => {
-  try {
-    localStorage.removeItem("boarddata");
-    location.reload();
-  } catch (err) {
-    console.error("Error resetting local storage:", err);
-  }
-};
-
 export const exportConfig = () => {
   try {
     const boardData = localStorage.getItem("boarddata");
@@ -49,17 +40,39 @@ export const exportConfig = () => {
   }
 };
 
-export const importConfig = (file: File) => {
+export const importConfig = () => {
   try {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const jsonData = event.target?.result as string;
-      const parsedData = JSON.parse(jsonData);
-      localStorage.setItem("boarddata", JSON.stringify(parsedData));
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.onchange = (event) => {
+      const file = (event.target as HTMLInputElement)?.files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const jsonData = event.target?.result as string;
+          const parsedData = JSON.parse(jsonData);
+          parsedData.config.active = parsedData.config.board[0];
+          const boardData = { board: {} };
+          boardData.board = parsedData.config;
+          localStorage.setItem("boarddata", JSON.stringify(boardData));
+          location.reload();
+        };
+        reader.readAsText(file);
+      }
     };
-    reader.readAsText(file);
+    input.click();
   } catch (err) {
-    console.error("Error loading JSON file:", err);
+    console.error("Error importing state from JSON file:", err);
+  }
+};
+
+export const resetBoard = () => {
+  try {
+    localStorage.removeItem("boarddata");
+    location.reload();
+  } catch (err) {
+    console.error("Error resetting local storage:", err);
   }
 };
 
@@ -85,6 +98,7 @@ export const handleFilterChange = (newFilter: string | null) => {
 export const saveState = (state: any) => {
   try {
     const serializesState = JSON.stringify(state);
+    console.log(serializesState);
     localStorage.setItem("boarddata", serializesState);
   } catch (err) {
     return err;
