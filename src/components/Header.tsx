@@ -14,7 +14,7 @@ import SideBar from "./SideBar";
 import { useSelector } from "react-redux";
 import { appData } from "redux/boardSlice";
 import { IBoard } from "types";
-import { exportConfig, resetBoard } from "utilis";
+import { exportConfig, importConfig, resetBoard } from "utilis";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,9 +29,8 @@ export default function Header() {
   const editBoard = () => {
     setOpenBoard(true);
     setOpenMenu(false);
-
   };
-  const handleOpenMenu = ()=> setOpenMenu(false)
+  const handleOpenMenu = () => setOpenMenu(false);
   const isMobile = useMediaQuery({ query: "(min-width: 700px)" });
   return (
     <>
@@ -83,23 +82,21 @@ export default function Header() {
                     <span className="py-8"> + Add capability</span>
                   )}
                 </button>
+                <div className="pr-4"></div>
                 <div className="pr-4">
-                </div>
-                <div className="pr-4">
-                <button
-                  aria-label="Export"
-                  onClick={() => exportConfig()}
-                  className={`rounded-full bg-primary text-sm font-bold text-white ${
-                    !isMobile ? "w-[40px]" : "w-32"
-                  } h-[40px]`}
-                >
-                  {!isMobile ? (
-                    <IoIosAdd className="inline-flex" />
-                  ) : (
-                    <span className="py-8">Export</span>
-                  )}
-                </button>
-              
+                  <button
+                    aria-label="Export"
+                    onClick={() => exportConfig()}
+                    className={`rounded-full bg-primary text-sm font-bold text-white ${
+                      !isMobile ? "w-[40px]" : "w-32"
+                    } h-[40px]`}
+                  >
+                    {!isMobile ? (
+                      <IoIosAdd className="inline-flex" />
+                    ) : (
+                      <span className="py-8">Export</span>
+                    )}
+                  </button>
                 </div>
                 <div>
                   <BiDotsVerticalRounded
@@ -150,6 +147,10 @@ export default function Header() {
             {
               title: "Reset configuration",
               handler: resetBoard,
+            },
+            {
+              title: "Import configuration",
+              handler: importConfig,
             },
           ]}
         />
