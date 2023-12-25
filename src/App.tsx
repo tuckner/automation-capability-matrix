@@ -4,7 +4,7 @@ import SideBar from "components/SideBar";
 import Board from "components/Board";
 import { MdVisibilityOff } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
-import {  Collapse } from "@chakra-ui/react";
+import { Collapse } from "@chakra-ui/react";
 
 function App() {
   const [showSidebar,setShowSidebar] = useState<boolean>(false);

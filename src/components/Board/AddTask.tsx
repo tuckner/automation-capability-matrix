@@ -8,6 +8,8 @@ import { appData, addTask, editTask, deleteTask } from "redux/boardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { checkDuplicatedTask } from "utilis";
 import { useToast } from "@chakra-ui/react";
+import { v4 as uuidv4 } from "uuid";
+import { uuid } from "uuidv4";
 
 const generateRandomNumber = (): string => {
   return String(Math.floor(Math.random() * (9999 - 9000 + 1)) + 9000);
@@ -152,7 +154,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                         type="button"
                         onClick={() => {
                           arrayHelpers.push({
-                            id: generateRandomNumber(),
+                            id: uuidv4(),
                             title: "",
                             isCompleted: false,
                           });
