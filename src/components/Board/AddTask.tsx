@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkDuplicatedTask } from "utilis";
 import { useToast } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
-import { uuid } from "uuidv4";
 
 const generateRandomNumber = (): string => {
   return String(Math.floor(Math.random() * (9999 - 9000 + 1)) + 9000);
