@@ -72,13 +72,13 @@ export default function Header() {
               <div className="flex items-center">
                 <div className="pr-4"></div>
                 <div className="flex items-center">
-                  <label htmlFor="Search" className="sr-only">
+                  <label htmlFor="Filter" className="sr-only">
                     {" "}
-                    Search{" "}
+                    Filter{" "}
                   </label>
                   <input
                     type="text"
-                    id="Search"
+                    id="Filter"
                     placeholder="Filter..."
                     onChange={(e) => handleFilterChange(e.target.value)}
                     className="w-full rounded-md border-gray-200 py-2.5 pl-3 pe-10 shadow-sm sm:text-sm"
