@@ -40,6 +40,16 @@ export default function TaskItem({ tasks, index }: Props) {
                 {" "}
                 {tasks.subtasks.length} workflows
               </p>
+              <div className="hidden">
+                {tasks.subtasks.map((subtask, index) => (
+                  <div key={index}>
+                    <p className="pt-2 text-xs text-gray font-bold">
+                      {" "}
+                      {subtask.title}
+                    </p>
+                  </div>
+                ))}
+              </div>
               <div className="pt-2 text-xs text-gray content-end font-bold">
                 {" "}
                 <div className="flex justify-end">
