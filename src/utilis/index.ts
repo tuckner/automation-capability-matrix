@@ -98,7 +98,6 @@ export const handleFilterChange = (newFilter: string | null) => {
 export const saveState = (state: any) => {
   try {
     const serializesState = JSON.stringify(state);
-    console.log(serializesState);
     localStorage.setItem("boarddata", serializesState);
   } catch (err) {
     return err;
