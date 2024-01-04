@@ -5,6 +5,7 @@ import Board from "components/Board";
 import { MdVisibilityOff } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
 import { Collapse } from "@chakra-ui/react";
+import { retrieveAndSaveState } from "utilis";
 
 function App() {
   const [showSidebar,setShowSidebar] = useState<boolean>(false);
@@ -20,6 +21,14 @@ function App() {
     } else {
       document.documentElement.classList.remove("dark");
     }
+
+  const queryParams = new URLSearchParams(location.search);
+  const configParam = queryParams.get("config"); // Replace 'sidebar' with your actual query parameter
+
+  // Set the state based on the URL parameter
+  if (configParam) {
+    retrieveAndSaveState(configParam);
+  }
   }, []);
 
   const isMobile = useMediaQuery({ query: "(min-width: 700px)" });

@@ -95,6 +95,22 @@ export const handleFilterChange = (newFilter: string | null) => {
   }
 };
 
+export const retrieveAndSaveState = async (config: string) => {
+  try {
+    const response = await fetch('https://fetch.automation-capability-matrix.workers.dev/?config=' + config);
+    if (!response.ok) {
+      throw new Error("Failed to retrieve data from the URL");
+    }
+    const parsedData = await response.json();
+    parsedData.config.active = parsedData.config.board[0];
+    const boardData = { board: {} };
+    boardData.board = parsedData.config;
+    saveState(boardData);
+  } catch (err) {
+    console.error("Error retrieving and saving state:", err);
+  }
+};
+
 export const saveState = (state: any) => {
   try {
     const serializesState = JSON.stringify(state);
