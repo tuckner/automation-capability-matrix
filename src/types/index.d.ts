@@ -9,6 +9,7 @@ export interface IBoard {
       name: string;
       description: string;
       category: string;
+      time_saved: string;
       techniques: string[];
       subtasks: {  id:string,
         title: string;
@@ -26,6 +27,7 @@ export interface IColumn {
     name: string;
     description: string;
     category: string;
+    time_saved: string;
     techniques: string[];
     subtasks: {
       id:string,
@@ -40,6 +42,7 @@ export interface ITask {
   name: string;
   description: string;
   category: string;
+  time_saved: string;
   techniques: string[];
   subtasks: {
     id:string,

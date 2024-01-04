@@ -94,6 +94,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                   name: tasks.name,
                   description: tasks.description,
                   category: tasks.category,
+                  time_saved: tasks.time_saved,
                   techniques: tasks.techniques,
                   subtasks: tasks.subtasks,
                 }
@@ -101,6 +102,7 @@ export default function AddTask({ handleClose, tasks }: Props) {
                   id: generateRandomNumber(),
                   name: "",
                   description: "",
+                  time_saved: "",
                   category: selectedColumn,
                   techniques: [],
                   subtasks: [],

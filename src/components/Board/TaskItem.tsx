@@ -35,37 +35,44 @@ export default function TaskItem({ tasks, index }: Props) {
               className="hover:opacity-60 shadow-lg  
               cursor-pointer bg-white dark:bg-secondary mb-4 rounded-lg py-6 px-4"
             >
-              <p className="font-bold text-sm">{tasks.name} </p>
-              <p className="pt-2 text-xs text-gray font-bold">
-                {" "}
-                {tasks.subtasks.length} workflows
-              </p>
               <div className="hidden">
                 {tasks.subtasks.map((subtask, index) => (
                   <div key={index}>
-                    <p className="pt-2 text-xs text-gray font-bold">
+                    <p className="text-xs text-gray font-bold">
                       {" "}
                       {subtask.title}
                     </p>
                   </div>
                 ))}
               </div>
-              <div className="pt-2 text-xs text-gray content-end font-bold">
-                {" "}
-                <div className="flex justify-end">
-                  <BsCircleFill
-                    className=""
-                    onClick={handleOpenModal}
-                    style={{
-                      color:
-                        tasks.subtasks.length === 1
-                          ? "#e6e22e"
-                          : tasks.subtasks.length >= 2
-                          ? "#238823"
-                          : "#e64747",
-                    }}
-                  />
-                </div>
+              <div className="flex justify-between">
+                <p className="font-bold">{tasks.name}</p>
+                <p className="pt-2 text-xs text-slate font-bold">
+                  {" "}
+                  A{tasks.id}
+                </p>
+              </div>
+              {tasks.time_saved && (
+                <p className="pt-2 text-xs text-gray font-bold">
+                    {" "}
+                    Time saved: {tasks.time_saved}
+                </p>
+              )}
+              <div className="flex justify-between items-center pt-10">
+                <p className="text-xs text-gray font-bold">
+                  {tasks.subtasks.length} workflows
+                </p>
+                <BsCircleFill
+                  onClick={handleOpenModal}
+                  style={{
+                    color:
+                      tasks.subtasks.length === 1
+                        ? "#e6e22e"
+                        : tasks.subtasks.length >= 2
+                        ? "#238823"
+                        : "#e64747",
+                  }}
+                />
               </div>
             </div>
           );

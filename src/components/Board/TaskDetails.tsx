@@ -92,9 +92,14 @@ export default function TaskDetails({
               )}
             </div>
           </div>
-          <div className="text-xs text-gray my-2">
-            <p>ID: A{tasks.id}</p>
+          <div className="text-sm my-2">
+            <p>A{tasks.id}</p>
           </div>
+          {tasks.time_saved && (
+          <div className="text-xs text-gray my-2">
+            <p>Time saved: {tasks.time_saved}</p>
+          </div>
+          )}
           <div>
             <p className="text-sm my-4">
               <Linkify as="p" options={linkoptions}>
