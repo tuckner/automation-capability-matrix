@@ -375,8 +375,8 @@
     {
       "name": "Block Email Sender",
       "category": "Response",
-      "id": 5017,
-      "last_edited": "2024-01-02T02:49:00.000Z",
+      "id": 5018,
+      "last_edited": "2024-01-04T03:56:00.000Z",
       "description": "Blocking email senders can prevent future phishing attempts from the same sender from reaching users. By blocking the sender, organizations can reduce the risk of users being targeted by future phishing attacks from that source. This can be particularly useful if the sender has been identified as a known phisher or if the organization has received multiple phishing attempts from the same sender. Additionally, blocking email senders can help to reduce the overall volume of phishing attempts that an organization receives, which can make it easier for security teams to focus on more pressing threats. Overall, blocking email senders can be an effective response strategy to combat phishing in a security operations center.",
       "services": [],
       "techniques": [
