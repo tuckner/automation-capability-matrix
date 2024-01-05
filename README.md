@@ -1,6 +1,6 @@
 # Automation Capability Matrix
 
-The Automation Capability Matrix is a framework for analyzing automated workflows an organization has implemented.
+The Automation Capability Matrix is a framework for analyzing automated workflows an organization has implemented. This [interactive tool](https://automation-capability-matrix.pages.dev/) allows for anyone to assess their security automation program by aligning workflows to common automation capabilities.
 
 <img width="1457" alt="image" src="https://github.com/tuckner/automation-capability-matrix/assets/8551704/e4123a21-8de0-4f7a-bb33-50d9cd84922e">
 
