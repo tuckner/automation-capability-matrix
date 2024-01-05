@@ -33,7 +33,7 @@ export default function TaskItem({ tasks, index }: Props) {
                 setIsOpen(true);
               }}
               className="hover:opacity-60 shadow-lg  
-              cursor-pointer bg-white dark:bg-secondary mb-4 rounded-lg py-6 px-4"
+              cursor-pointer bg-white dark:bg-secondary mb-4 rounded-lg py-4 px-4"
             >
               <div className="hidden">
                 {tasks.subtasks.map((subtask, index) => (
@@ -45,9 +45,9 @@ export default function TaskItem({ tasks, index }: Props) {
                   </div>
                 ))}
               </div>
-              <div className="flex justify-between">
-                <p className="font-bold">{tasks.name}</p>
-                <p className="pt-2 text-xs text-slate font-bold">
+              <div className="flex align-top justify-between">
+                <p className="font-bold pr-2">{tasks.name}</p>
+                <p className="pt-1 text-xs text-slate font-bold">
                   {" "}
                   A{tasks.id}
                 </p>
