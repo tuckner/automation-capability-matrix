@@ -106,7 +106,7 @@ export const retrieveAndSaveState = async (config: string) => {
     const boardData = { board: {} };
     boardData.board = parsedData.config;
     saveState(boardData);
-    // location.reload();
+    location.replace('/');
   } catch (err) {
     console.error("Error retrieving and saving state:", err);
   }
