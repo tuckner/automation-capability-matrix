@@ -94,11 +94,15 @@ export default function TaskDetails({
           </div>
           <div className="text-sm my-2">
             <p>A{tasks.id}</p>
-          </div>
-          {tasks.time_saved && (
-          <div className="text-xs text-gray my-2">
-            <p>Time saved: {tasks.time_saved}</p>
-          </div>
+          </div> 
+          {tasks.stats && (
+            <>
+              {tasks.stats.map((stat: { name: string; value: string }, index: number) => (
+                <p key={index} className="text-xs text-gray my-2">
+                  {`${stat.name}: ${stat.value}`}
+                </p>
+              ))}
+            </>
           )}
           <div>
             <p className="text-sm my-4">

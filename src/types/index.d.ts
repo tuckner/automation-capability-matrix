@@ -9,7 +9,7 @@ export interface IBoard {
       name: string;
       description: string;
       category: string;
-      time_saved: string;
+      stats: IStat[];
       techniques: string[];
       subtasks: {  id:string,
         title: string;
@@ -17,6 +17,11 @@ export interface IBoard {
       }[];
     }[];
   }[];
+}
+
+export interface IStat {
+  name: string;
+  value: string;
 }
 
 export interface IColumn {
@@ -27,7 +32,7 @@ export interface IColumn {
     name: string;
     description: string;
     category: string;
-    time_saved: string;
+    stats: IStat[];
     techniques: string[];
     subtasks: {
       id:string,
@@ -42,7 +47,7 @@ export interface ITask {
   name: string;
   description: string;
   category: string;
-  time_saved: string;
+  stats: IStat[];
   techniques: string[];
   subtasks: {
     id:string,

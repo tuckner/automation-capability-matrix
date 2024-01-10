@@ -5,7 +5,6 @@ import AddTask from "./AddTask";
 import TaskDetails from "./TaskDetails";
 import { Draggable } from "@hello-pangea/dnd";
 import { BsCircleFill } from "react-icons/bs";
-// import { randomColor } from "utilis";
 
 interface Props {
   tasks: ITask;
@@ -39,7 +38,6 @@ export default function TaskItem({ tasks, index }: Props) {
                 {tasks.subtasks.map((subtask, index) => (
                   <div key={index}>
                     <p className="text-xs text-gray font-bold">
-                      {" "}
                       {subtask.title}
                     </p>
                   </div>
@@ -48,15 +46,17 @@ export default function TaskItem({ tasks, index }: Props) {
               <div className="flex align-top justify-between">
                 <p className="font-bold pr-2">{tasks.name}</p>
                 <p className="pt-1 text-xs text-slate font-bold">
-                  {" "}
                   A{tasks.id}
                 </p>
               </div>
-              {tasks.time_saved && (
-                <p className="pt-2 text-xs text-gray font-bold">
-                    {" "}
-                    Time saved: {tasks.time_saved}
-                </p>
+              {tasks.stats && (
+                <>
+                  {tasks.stats.map((stat: { name: string; value: string }, index: number) => (
+                    <p key={index} className="pt-2 text-xs text-gray font-bold">
+                      {`${stat.name}: ${stat.value}`}
+                    </p>
+                  ))}
+                </>
               )}
               <div className="flex justify-between items-center pt-10">
                 <p className="text-xs text-gray font-bold">
