@@ -27,7 +27,7 @@ The Automation Capability Matrix is a framework for analyzing automated workflow
 ## Run
 
 ### Installation
-1. Clone this repository into your local machine:
+1. Clone this repository into your local machine
 ```
 git clone https://github.com/tuckner/automation-capability-matrix.git
 ```
@@ -35,11 +35,11 @@ git clone https://github.com/tuckner/automation-capability-matrix.git
 ```
 yarn install
 ```
-3. Start the application by running the start script.
+3. Run developer mode
 ```
 yarn run dev
 ```
-4. Run test.
+4. Run preview mode
 ```
 yarn run test
 ```
