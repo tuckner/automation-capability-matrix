@@ -44,6 +44,22 @@ yarn run dev
 yarn run test
 ```
 
+### Docker
+
+1. Build image
+
+```
+docker build . -t acm
+```
+
+2. Run image
+
+```
+docker run -p 3000:3000 acm
+```
+
+3. Access service at `http://localhost:3000`
+
 #### Credit
 
 - [dodoburner](https://github.com/dodoburner/kanban-task-management-web-app)
