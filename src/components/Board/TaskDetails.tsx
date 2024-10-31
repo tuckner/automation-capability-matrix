@@ -77,11 +77,11 @@ export default function TaskDetails({
                 <Popup
                   items={[
                     {
-                      title: "Edit Task",
+                      title: "Edit Capability",
                       handler: editTaskHandler,
                     },
                     {
-                      title: "Delete Task",
+                      title: "Delete Capability",
                       handler: () => {
                         setDeleteTask(true);
                       },
